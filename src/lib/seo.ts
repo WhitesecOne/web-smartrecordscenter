@@ -21,8 +21,8 @@ export function siteGraph() {
         description: site.description,
         address: {
           "@type": "PostalAddress",
-          streetAddress: `${site.addressParts.street}, Ceger, Kec. Cipayung`,
-          addressLocality: "Kota Jakarta Timur",
+          streetAddress: site.addressParts.street,
+          addressLocality: site.addressParts.locality,
           addressRegion: site.addressParts.region,
           postalCode: site.addressParts.postalCode,
           addressCountry: "ID",

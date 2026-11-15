@@ -6,9 +6,9 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   // Contact details and entity name supplied by the owner on 2026-10-06 (provisional until the legal entity is registered).
   entity: "Smart Records Center",
-  // Street line (with No. 4, RT 006/RW 003) revised by the owner on 2026-11-15; the district, city and postal code are unchanged.
-  addressParts: { street: "Jalan Raya Ceger No. 4, RT 006/RW 003", locality: "Ceger, Kec. Cipayung, Kota Jakarta Timur", region: "DKI Jakarta", postalCode: "13880" },
-  address: "Jalan Raya Ceger No. 4, RT 006/RW 003, Ceger, Kec. Cipayung, Kota Jakarta Timur, DKI Jakarta 13880",
+  // Address confirmed by the owner on 2026-11-15.
+  addressParts: { street: "Jalan Raya Ceger No.4 RT 006/03", locality: "Ceger, Jakarta", region: "Jakarta", postalCode: "13820" },
+  address: "Jalan Raya Ceger No.4 RT 006/03, Ceger, Jakarta 13820, Indonesia",
   email: "support@smartrecordscenter.com",
   phone: "+62 816-744-953",
   securityEmail: "support@smartrecordscenter.com",
