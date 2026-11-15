@@ -28,7 +28,7 @@ export function GET() {
     "",
     "## Perusahaan",
     ...companyNav.map((l) => `- [${l.label}](${abs(l.href)}): ${l.desc}`),
-    `- [Kontak dan permintaan demo](${abs("/kontak")}): formulir permintaan demo dan kontak langsung.`,
+    `- [Kontak dan permintaan demo](${abs("/kontak")}): minta demo lewat email dan kontak langsung.`,
     "",
     "## Acuan rancangan (bukan klaim sertifikasi)",
     ...references.map((r) => `- ${r.code} ${r.name}`),

@@ -1,4 +1,4 @@
-import { CheckIcon, ShieldAlertIcon } from "lucide-react"
+import { CheckIcon, MailIcon, ShieldAlertIcon } from "lucide-react"
 import type { Metadata } from "next"
 
 import { JsonLd } from "@/components/json-ld"
@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button"
 import { pageGraph } from "@/lib/seo"
 import { ogBase, site } from "@/lib/site"
 
-import { ContactForm } from "./contact-form"
+import { CopyEmail } from "./copy-email"
 
 export const metadata: Metadata = {
   title: "Minta Demo",
   description:
-    "Minta demo Smart Records Center. Kami tunjukkan repositori, pencarian, metadata, klasifikasi, retensi dan penyusutan, jejak audit, serta pelaporan memakai skenario arsip organisasi Anda.",
+    "Minta demo Smart Records Center lewat email. Kami tunjukkan repositori, pencarian, metadata, klasifikasi, retensi dan penyusutan, jejak audit, serta pelaporan memakai skenario arsip organisasi Anda.",
   alternates: { canonical: "/kontak" },
   openGraph: { ...ogBase, url: "/kontak", title: "Minta demo Smart Records Center" },
 }
@@ -25,23 +25,33 @@ const agenda = [
   "Opsi penerapan dan integrasi dengan sistem yang sudah Anda pakai.",
 ]
 
+const include = ["Nama, jabatan, dan nama organisasi Anda", "Sektor organisasi (pemerintah, BUMN, keuangan, korporasi)", "Kebutuhan arsip Anda secara umum, dan modul yang paling Anda butuhkan"]
+
+// Opens the visitor's mail app with the subject and an outline already filled in.
+const subject = "Permintaan demo Smart Records Center"
+const body = "Halo tim Smart Records Center,\n\nNama:\nJabatan:\nOrganisasi:\nSektor:\n\nKebutuhan arsip kami:\n\nTerima kasih."
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
 export default function KontakPage() {
   return (
     <>
-      <JsonLd data={pageGraph("ContactPage", "/kontak", "Minta Demo", "Minta demo Smart Records Center atau hubungi kami langsung.")} />
+      <JsonLd data={pageGraph("ContactPage", "/kontak", "Minta Demo", "Minta demo Smart Records Center atau hubungi kami langsung lewat email.")} />
       <PageHero
         crumbs={[{ label: "Kontak" }]}
         title="Minta demo Smart Records Center"
-        lead="Ceritakan kebutuhan arsip organisasi Anda. Kami siapkan demo yang mengikuti alur kerja Anda, bukan presentasi umum."
+        lead="Kirim email singkat tentang kebutuhan arsip organisasi Anda. Kami siapkan demo yang mengikuti alur kerja Anda, bukan presentasi umum."
         actions={
-          <Button size="lg" className="mt-8 w-full sm:w-auto lg:hidden" render={<a href="#formulir" />} nativeButton={false}>
-            Isi formulir permintaan demo
-          </Button>
+          <div data-primary-cta className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button size="lg" render={<a href={mailto} />} nativeButton={false}>
+              <MailIcon aria-hidden />
+              Kirim email ke {site.email}
+            </Button>
+          </div>
         }
       />
 
       <Section className="py-14 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-10">
             <div>
               <h2 className="text-2xl font-bold tracking-[-0.02em]">Yang kita bahas dalam demo</h2>
@@ -54,11 +64,36 @@ export default function KontakPage() {
                 ))}
               </ul>
             </div>
+          </div>
+
+          <div className="flex flex-col gap-8">
+            <div className="rounded-xl border border-border bg-white p-5 sm:p-8">
+              <h2 className="text-xl font-bold tracking-[-0.02em]">Cara menghubungi kami</h2>
+              <p className="mt-3 leading-relaxed">
+                Tulis email ke{" "}
+                <a href={`mailto:${site.email}`} className="font-semibold break-all text-brand underline">
+                  {site.email}
+                </a>
+                . Tombol di atas membuka aplikasi email Anda dengan subjek dan kerangka isi yang sudah terisi. Bila tidak terbuka, salin alamatnya.
+              </p>
+              <p className="mt-5 text-sm font-semibold text-navy">Sebaiknya sebutkan:</p>
+              <ul className="mt-2 flex flex-col gap-2 text-[0.9375rem]">
+                {include.map((item) => (
+                  <li key={item} className="flex gap-3 leading-relaxed">
+                    <CheckIcon className="mt-1 size-4 shrink-0 text-brand" aria-hidden />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <CopyEmail email={site.email} />
+              </div>
+            </div>
 
             <p className="flex gap-3 rounded-lg bg-mist p-4 text-[0.9375rem] leading-relaxed">
               <ShieldAlertIcon className="mt-0.5 size-5 shrink-0 text-navy" aria-hidden />
               <span>
-                <strong className="font-semibold text-navy">Jangan kirim dokumen rahasia melalui formulir ini.</strong> Cukup jelaskan jenis arsip dan
+                <strong className="font-semibold text-navy">Jangan lampirkan dokumen rahasia di email pertama.</strong> Cukup jelaskan jenis arsip dan
                 kebutuhannya secara umum.
               </span>
             </p>
@@ -87,13 +122,6 @@ export default function KontakPage() {
                   </dd>
                 </div>
               </dl>
-            </div>
-          </div>
-
-          <div id="formulir" className="order-first scroll-mt-24 rounded-xl border border-border bg-white p-5 sm:p-8 lg:order-none lg:self-start">
-            <h2 className="text-xl font-bold tracking-[-0.02em]">Formulir permintaan demo</h2>
-            <div className="mt-6">
-              <ContactForm />
             </div>
           </div>
         </div>

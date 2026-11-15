@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 
-const HIDDEN_ON = ["/kontak", "/terima-kasih"]
+const HIDDEN_ON = ["/kontak"]
 
 // Mobile-only bar; steps aside while an on-page CTA marked data-primary-cta is on screen.
 export function StickyCta() {

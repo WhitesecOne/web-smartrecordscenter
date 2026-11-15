@@ -7,7 +7,7 @@ import { site } from "@/lib/site"
 
 const title = "Kebijakan Privasi"
 const description =
-  "Cara Smart Records Center memproses data pribadi dari form kontak dan cookie analitik di situs ini, dasar pemrosesan menurut UU 27/2022, serta hak Anda."
+  "Cara Smart Records Center memproses data pribadi dari email kontak dan cookie analitik di situs ini, dasar pemrosesan menurut UU 27/2022, serta hak Anda."
 
 export const metadata: Metadata = {
   title,
@@ -38,7 +38,7 @@ const sections: LegalSection[] = [
     title: "Data yang kami kumpulkan",
     body: (
       <>
-        <p>Saat Anda mengisi form kontak atau permintaan demo, kami menerima data yang Anda berikan:</p>
+        <p>Situs ini tidak memiliki formulir. Saat Anda meminta demo atau menghubungi kami lewat email, kami menerima data yang Anda tulis sendiri di email, misalnya:</p>
         <ul>
           <li>nama;</li>
           <li>nama organisasi;</li>
@@ -49,8 +49,7 @@ const sections: LegalSection[] = [
           <li>isi pesan.</li>
         </ul>
         <p>
-          Server kami juga menerima data teknis yang dikirim peramban secara otomatis, seperti alamat IP dan jenis peramban. Data ini dipakai untuk keamanan situs dan
-          pembatasan jumlah kiriman form.
+          Server kami juga menerima data teknis yang dikirim peramban secara otomatis, seperti alamat IP dan jenis peramban. Data ini dipakai untuk keamanan situs.
         </p>
         <p>
           Kami tidak meminta data pribadi yang bersifat spesifik, seperti data kesehatan, biometrik, atau keuangan pribadi. Mohon tidak mencantumkannya di kolom pesan.
@@ -81,7 +80,7 @@ const sections: LegalSection[] = [
       <>
         <p>Kami memproses data pribadi berdasarkan dasar pemrosesan yang diatur dalam Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi:</p>
         <ul>
-          <li>data form kontak: pemenuhan permintaan Anda sebelum kemungkinan perjanjian, dan persetujuan yang Anda berikan saat mengirim form;</li>
+          <li>data email kontak: pemenuhan permintaan Anda sebelum kemungkinan perjanjian, dan persetujuan yang Anda berikan saat mengirim email kepada kami;</li>
           <li>cookie analitik: persetujuan eksplisit melalui banner cookie, yang dapat Anda tarik kapan saja;</li>
           <li>data teknis untuk keamanan situs: kepentingan yang sah untuk melindungi situs dan penggunanya.</li>
         </ul>
@@ -117,15 +116,12 @@ const sections: LegalSection[] = [
     title: "Penyimpanan dan masa simpan data",
     body: (
       <>
-        <p>Data dari form kontak dikirim sebagai email ke alamat {site.email} melalui layanan pengiriman email Resend.</p>
+        <p>Email yang Anda kirim ke {site.email} diterima dan disimpan di layanan email bisnis kami yang disediakan Hostinger.</p>
         <p>
           Data tersebut kami simpan paling lama 2 tahun sejak komunikasi terakhir dengan Anda. Setelah masa simpan berakhir, data dihapus atau dianonimkan, kecuali
           peraturan perundang-undangan mewajibkan penyimpanan lebih lama.
         </p>
-        <p>
-          Log teknis server di penyedia hosting mencatat status dan metadata teknis. Bila pengiriman email sedang tidak tersedia, isi permintaan Anda dicatat sementara di
-          log tersebut agar tetap dapat kami tindak lanjuti, lalu terhapus sesuai masa simpan log penyedia hosting.
-        </p>
+        <p>Log teknis server di penyedia hosting mencatat status dan metadata teknis, tanpa isi email Anda.</p>
       </>
     ),
   },
@@ -139,7 +135,7 @@ const sections: LegalSection[] = [
           memproses data atas instruksi kami dan terikat kewajiban kerahasiaan.
         </p>
         <p>
-          Daftar penyedia layanan: Vercel Inc. (hosting situs), Resend (pengiriman email form kontak), dan Google LLC (analitik, hanya bila Anda memberi persetujuan
+          Daftar penyedia layanan: Vercel Inc. (hosting situs), Hostinger (email bisnis dan nama domain), dan Google LLC (analitik, hanya bila Anda memberi persetujuan
           cookie).
         </p>
         <p>
@@ -180,8 +176,7 @@ const sections: LegalSection[] = [
         <p>Kami menerapkan langkah teknis dan organisasi yang wajar untuk melindungi data pribadi Anda, antara lain:</p>
         <ul>
           <li>koneksi terenkripsi antara peramban Anda dan situs;</li>
-          <li>akses ke data form yang dibatasi pada personel yang memerlukannya;</li>
-          <li>pembatasan jumlah kiriman dan perlindungan form dari spam;</li>
+          <li>akses ke kotak email kontak yang dibatasi pada personel yang memerlukannya;</li>
           <li>log teknis tanpa isi pesan dan tanpa data pribadi yang tidak diperlukan.</li>
         </ul>
         <p>

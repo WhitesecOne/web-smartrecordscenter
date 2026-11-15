@@ -8,7 +8,7 @@ Situs publik Smart Records Center, platform tata kelola arsip digital. Next.js 1
 npm install
 npm run dev      # http://localhost:3000
 npm run lint
-npm run check    # cek skema formulir kontak dan rantai hash log audit
+npm run check    # cek rantai hash log audit
 npm run build
 ```
 
@@ -19,9 +19,6 @@ Salin `.env.example` menjadi `.env.local` untuk lokal, dan isi nilai yang sama d
 | Nama | Wajib | Fungsi |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Ya, di produksi | URL kanonis, contoh `https://smartrecordscenter.com`. Tanpa nilai ini `robots.txt` memblokir semua crawler. |
-| `RESEND_API_KEY` | Ya, agar formulir demo terkirim | Mengirim permintaan demo ke email pemilik lewat Resend. Tanpa kunci, permintaan hanya tercatat di log server. |
-| `CONTACT_FROM` | Tidak | Alamat pengirim, harus memakai domain yang sudah diverifikasi di Resend. |
-| `CONTACT_TO` | Tidak | Penerima permintaan demo. Bawaan: email di `src/lib/site.ts`. |
 | `NEXT_PUBLIC_GA_ID` | Tidak | ID Google Analytics 4; dimuat hanya setelah pengunjung menyetujui cookie. |
 
 ## Struktur konten

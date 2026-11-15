@@ -30,7 +30,7 @@ SMART RECORDS CENTER
 
 | Komponen | Status | Catatan |
 |---|---|---|
-| Situs publik Bahasa Indonesia (`/`, `/platform` + 3 subhalaman, `/modul` + 5 modul, `/solusi`, `/mengapa-kami`, `/tentang-kami`, `/kontak`, `/terima-kasih`, `/kebijakan-privasi`, `/syarat-ketentuan`) | [ADA] | Next.js 16 App Router, TypeScript, Tailwind v4, shadcn/ui (Base UI), Motion. Versi English menyusul |
+| Situs publik Bahasa Indonesia (`/`, `/platform` + 3 subhalaman, `/modul` + 5 modul, `/solusi`, `/mengapa-kami`, `/tentang-kami`, `/kontak`, `/kebijakan-privasi`, `/syarat-ketentuan`) | [ADA] | Next.js 16 App Router, TypeScript, Tailwind v4, shadcn/ui (Base UI), Motion. Versi English menyusul |
 | Demo app dengan data contoh | [RENCANA] ditunda | Diputuskan pemilik 26 Sep 2026: fokus website dulu. Layar produk di situs sudah memakai data contoh berlabel |
 | Form kontak | [ADA] sebagian | Validasi server; tujuan pengiriman (email/CRM) belum ditentukan |
 | API service, PostgreSQL, object storage, worker AI, preservation, audit ledger | [RENCANA] | Lihat `ARCHITECTURE.md` |

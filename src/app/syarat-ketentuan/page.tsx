@@ -40,7 +40,7 @@ const sections: LegalSection[] = [
         <ul>
           <li>mengganggu, membebani secara berlebihan, atau mencoba menembus keamanan situs;</li>
           <li>mencoba mengakses bagian situs atau sistem yang tidak dibuka untuk umum;</li>
-          <li>mengirim spam, kode berbahaya, atau isi yang melanggar hukum melalui form;</li>
+          <li>mengirim spam, kode berbahaya, atau isi yang melanggar hukum melalui email atau kanal kontak kami;</li>
           <li>mengirim data pribadi orang lain tanpa dasar yang sah;</li>
           <li>menggunakan situs dengan cara yang melanggar peraturan perundang-undangan.</li>
         </ul>
@@ -138,7 +138,7 @@ const sections: LegalSection[] = [
     title: "Data pribadi",
     body: (
       <p>
-        Pemrosesan data pribadi yang Anda kirim melalui situs ini, termasuk melalui form kontak dan cookie analitik, diatur dalam{" "}
+        Pemrosesan data pribadi yang Anda kirim melalui situs ini, termasuk melalui email kontak dan cookie analitik, diatur dalam{" "}
         <Link href="/kebijakan-privasi">Kebijakan Privasi</Link>.
       </p>
     ),

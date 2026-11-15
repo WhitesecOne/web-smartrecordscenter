@@ -22,7 +22,7 @@ flowchart LR
 ```
 
 - Situs publik berbahasa Indonesia tanpa segmen bahasa. Versi English menyusul (keputusan pemilik, 26 Sep 2026); saat itu routing bahasa ditambahkan.
-- Semua halaman publik statis (SSG), kecuali `/terima-kasih` yang dirender per permintaan dan `noindex`.
+- Semua halaman publik statis (SSG). `/kontak` memakai tautan email langsung, tanpa formulir dan tanpa server action.
 - Demo app ditunda. Layar produk di situs dibuat dengan komponen (`src/components/product/*`) dan data contoh berlabel "Data contoh".
 - Register audit contoh diverifikasi dengan SHA-256 sungguhan di browser (`src/lib/chain.ts`).
 
@@ -42,7 +42,6 @@ src/
     modul/[slug]/page.tsx       # 5 halaman modul (SSG dari src/lib/modules.ts)
     solusi/  mengapa-kami/  tentang-kami/
     kontak/                     # form + Server Action + skema zod
-    terima-kasih/               # noindex, conversion ping
     kebijakan-privasi/  syarat-ketentuan/
     not-found.tsx  error.tsx  global-error.tsx
     robots.ts  sitemap.ts  manifest.ts  opengraph-image.tsx  icon.*  apple-icon.tsx
@@ -55,7 +54,6 @@ src/
     modules.ts                  # isi 5 modul
     sample.ts                   # data contoh
     chain.ts                    # rantai hash register audit
-    contact-schema.ts           # validasi form kontak
 ```
 
 ## 3. Target arsitektur [RENCANA]
