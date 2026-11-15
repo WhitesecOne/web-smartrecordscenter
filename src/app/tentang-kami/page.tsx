@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 
+import { JsonLd } from "@/components/json-ld"
 import { ProductMock } from "@/components/product/mocks"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
+import { pageGraph } from "@/lib/seo"
 import { ogBase, site } from "@/lib/site"
 
 const title = "Tentang Kami"
@@ -54,6 +56,7 @@ export default function TentangKamiPage() {
 
   return (
     <>
+      <JsonLd data={pageGraph("AboutPage", "/tentang-kami", title, description)} />
       <PageHero
         crumbs={[{ label: "Tentang Kami" }]}
         title="Kami membangun tata kelola arsip yang bisa dipertanggungjawabkan"

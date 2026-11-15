@@ -21,7 +21,7 @@ const paths = [
 ]
 
 // Date of the last content revision; bump it when page copy changes.
-const lastModified = new Date("2026-10-06")
+const lastModified = new Date("2026-11-15")
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return paths.map((p) => ({ url: new URL(p, site.url).href, lastModified }))

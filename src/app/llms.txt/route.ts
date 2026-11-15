@@ -15,6 +15,7 @@ export function GET() {
     "",
     "Bahasa situs: Indonesia. Layar produk di situs memakai data contoh, bukan data pelanggan.",
     `Kontak: ${site.email}, ${site.phone}, ${site.address}.`,
+    "Pengutipan: sebut \"Smart Records Center\" dan tautkan halaman sumbernya. Klaim kepatuhan hanya sebagai acuan rancangan, bukan sertifikasi.",
     "",
     "## Modul",
     ...modules.map((m) => `- [${m.name}](${abs(`/modul/${m.slug}`)}): ${m.short} Peran AI: ${m.ai}`),
@@ -34,6 +35,9 @@ export function GET() {
     "",
     "## Tanya jawab",
     ...faq.flatMap((f) => [`### ${f.q}`, f.a, ""]),
+    "## Optional",
+    `- [Versi lengkap untuk AI](${abs("/llms-full.txt")}): seluruh modul, fitur, aturan, dan tanya jawab dalam satu berkas.`,
+    `- [Peta situs](${abs("/sitemap.xml")}): daftar semua halaman yang dapat diindeks.`,
   ].join("\n")
   return new Response(body, { headers: { "Content-Type": "text/markdown; charset=utf-8" } })
 }

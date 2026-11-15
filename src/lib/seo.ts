@@ -21,10 +21,10 @@ export function siteGraph() {
         description: site.description,
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Jl. Raya Ceger, Jl. H. Baneng No. 4, RT.6/RW.3, Ceger",
+          streetAddress: `${site.addressParts.street}, Ceger, Kec. Cipayung`,
           addressLocality: "Kota Jakarta Timur",
-          addressRegion: "DKI Jakarta",
-          postalCode: "13880",
+          addressRegion: site.addressParts.region,
+          postalCode: site.addressParts.postalCode,
           addressCountry: "ID",
         },
         contactPoint: { "@type": "ContactPoint", contactType: "sales", email: site.email, telephone: site.phone, availableLanguage: ["id"] },
@@ -71,5 +71,21 @@ export function breadcrumbGraph(crumbs: { href?: string; label: string }[], curr
       name: c.label,
       ...(c.href ? { item: abs(c.href) } : current ? { item: abs(current) } : {}),
     })),
+  }
+}
+
+/** A page typed for crawlers (ContactPage, AboutPage, WebPage), tied to the Organization; `about` names the product topic. */
+export function pageGraph(type: "WebPage" | "ContactPage" | "AboutPage", path: string, name: string, description: string, about?: object) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": abs(path) + "#halaman",
+    url: abs(path),
+    name,
+    description,
+    inLanguage: "id-ID",
+    isPartOf: { "@id": abs("/#situs") },
+    publisher: { "@id": orgId },
+    ...(about ? { about } : {}),
   }
 }

@@ -3,10 +3,12 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+import { JsonLd } from "@/components/json-ld"
 import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { moduleBySlug, modules, type Feature, type Photo } from "@/lib/modules"
+import { pageGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -54,6 +56,7 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
 
   return (
     <>
+      <JsonLd data={pageGraph("WebPage", `/modul/${m.slug}`, `Modul ${m.name}`, m.metaDescription, { "@type": "Thing", name: m.name, description: m.short })} />
       <PageHero crumbs={[{ href: "/modul", label: "Modul" }, { label: m.name }]} title={m.title} lead={m.lead} tone="navy" visual={<ProductMock k={m.heroMock} />} />
 
       <nav aria-label={`Bagian modul ${m.name}`} className="sticky top-16 z-20 border-b border-border bg-white/95 lg:top-[6.75rem]">

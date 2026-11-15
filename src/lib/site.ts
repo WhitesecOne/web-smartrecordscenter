@@ -6,10 +6,12 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   // Contact details and entity name supplied by the owner on 2026-10-06 (provisional until the legal entity is registered).
   entity: "Smart Records Center",
-  address: "Jl. Raya Ceger, Jl. H. Baneng No. 4, RT.6/RW.3, Ceger, Kec. Cipayung, Kota Jakarta Timur, DKI Jakarta 13880",
-  email: "hqonitah@gmail.com",
+  // Street line revised by the owner on 2026-11-15; the district, city and postal code are unchanged.
+  addressParts: { street: "Jalan Raya Ceger", locality: "Ceger, Kec. Cipayung, Kota Jakarta Timur", region: "DKI Jakarta", postalCode: "13880" },
+  address: "Jalan Raya Ceger, Ceger, Kec. Cipayung, Kota Jakarta Timur, DKI Jakarta 13880",
+  email: "support@smartrecordscenter.com",
   phone: "+62 816-744-953",
-  securityEmail: "hqonitah@gmail.com",
+  securityEmail: "support@smartrecordscenter.com",
 }
 
 export type NavLink = { href: string; label: string; desc?: string }

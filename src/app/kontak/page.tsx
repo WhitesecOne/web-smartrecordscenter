@@ -1,8 +1,10 @@
 import { CheckIcon, ShieldAlertIcon } from "lucide-react"
 import type { Metadata } from "next"
 
+import { JsonLd } from "@/components/json-ld"
 import { PageHero, Section } from "@/components/section"
 import { Button } from "@/components/ui/button"
+import { pageGraph } from "@/lib/seo"
 import { ogBase, site } from "@/lib/site"
 
 import { ContactForm } from "./contact-form"
@@ -26,6 +28,7 @@ const agenda = [
 export default function KontakPage() {
   return (
     <>
+      <JsonLd data={pageGraph("ContactPage", "/kontak", "Minta Demo", "Minta demo Smart Records Center atau hubungi kami langsung.")} />
       <PageHero
         crumbs={[{ label: "Kontak" }]}
         title="Minta demo Smart Records Center"
