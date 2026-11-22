@@ -12,7 +12,7 @@ import { ogBase } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const description =
-  "Tujuh modul Smart Records Center: Repositori Arsip, Pencarian & Temu Kembali, Manajemen Metadata, Klasifikasi Arsip, Retensi & Penyusutan, Jejak Audit, dan Pelaporan."
+  "Tujuh modul Smart Records Center: Verifikasi & Pemilahan Arsip, Klasifikasi Arsip, Repositori Arsip, Pencarian & Temu Kembali, Retensi & Penyusutan, Jejak Audit, dan Pelaporan (Dashboard)."
 
 export const metadata: Metadata = {
   title: "Modul Tata Kelola Arsip Digital",

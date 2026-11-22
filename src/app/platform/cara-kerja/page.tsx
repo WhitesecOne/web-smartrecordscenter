@@ -23,13 +23,13 @@ export const metadata: Metadata = {
 
 const stages: { name: string; lead: string; who: string; rules: string[]; proof: string; mock: MockKey; modules: Module["slug"][] }[] = [
   {
-    name: "Diterima, dilengkapi, dan diklasifikasikan",
-    lead: "Arsip masuk dari unggahan, email, pemindai, atau API ke ruang data organisasi. Sistem membuat nomor arsip dan mencatat hash berkas, lalu AI mengisi metadata dan mengusulkan kode klasifikasi.",
+    name: "Dipilah, diklasifikasikan, dan disimpan",
+    lead: "Dokumen masuk dari unggahan, email, pemindai, atau API. AI memilah dokumen arsip dan non-arsip, mengekstrak metadata dasar, dan mengusulkan kode klasifikasi sebelum arsip terverifikasi masuk repositori organisasi.",
     who: "Unit pengolah dan arsiparis",
-    rules: ["Berkas lolos pemindaian keamanan sebelum masuk repositori", "Usulan AI menunggu konfirmasi; di bawah 0,90 wajib direview", "Arsip final wajib memiliki metadata wajib dan kode klasifikasi"],
-    proof: "Hash berkas, usulan AI beserta skornya, dan siapa yang mengonfirmasi",
-    mock: "classify",
-    modules: ["repositori-arsip", "manajemen-metadata", "klasifikasi-arsip"],
+    rules: ["Dokumen non-arsip dipisahkan ke karantina agar repositori tetap bersih", "Usulan AI menunggu konfirmasi; di bawah 0,90 wajib direview", "Arsip final wajib memiliki kelengkapan metadata dan kode klasifikasi"],
+    proof: "Keputusan pemilahan, hash berkas, usulan AI beserta skornya, dan siapa yang mengonfirmasi",
+    mock: "triage",
+    modules: ["verifikasi-pemilahan-arsip", "klasifikasi-arsip", "repositori-arsip"],
   },
   {
     name: "Aktif",

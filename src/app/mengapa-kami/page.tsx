@@ -82,10 +82,10 @@ const comparison: Row[] = [
     src: native("Teks lengkap, OCR, filter metadata, pencarian makna"),
   },
   {
-    need: "Metadata standar (Dublin Core, ISO 23081)",
-    manual: manual("Hanya nama berkas dan folder", "Tidak ada"),
-    dms: partial("Field bebas, pemetaan standar perlu dibangun"),
-    src: native("Skema Dublin Core diperluas dengan validasi field wajib"),
+    need: "Verifikasi dan pemilahan dokumen arsip & non-arsip",
+    manual: manual("Dokumen arsip dan non-arsip tercampur di satu folder", "Tidak ada"),
+    dms: partial("Seluruh berkas masuk tanpa pemilahan status kearsipan"),
+    src: native("Pemilahan otomatis arsip vs non-arsip dengan validasi metadata Dublin Core & ISO 23081"),
   },
   {
     need: "Klasifikasi arsip per organisasi",
@@ -170,7 +170,7 @@ export default function MengapaKamiPage() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:gap-16">
           <SectionHeading
             title="Satu platform untuk seluruh siklus"
-            lead="Penyimpanan, pencarian, metadata, klasifikasi, retensi, penyusutan, jejak audit, dan pelaporan berada di satu sistem dengan satu sumber data."
+            lead="Verifikasi dan pemilahan, klasifikasi, repositori, pencarian, retensi dan penyusutan, jejak audit, serta pelaporan (dashboard) berada di satu sistem dengan satu sumber data."
           />
           <div className="flex flex-col justify-end">
             <ul className="flex flex-col gap-3">

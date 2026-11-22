@@ -2,7 +2,7 @@ export const site = {
   name: "Smart Records Center",
   tagline: "Platform tata kelola arsip digital",
   description:
-    "Smart Records Center adalah platform tata kelola arsip digital: repositori terstruktur per organisasi, pencarian teks lengkap, metadata standar, klasifikasi, retensi dan penyusutan, jejak audit yang tidak dapat diubah, serta pelaporan kepatuhan, dengan AI yang usulannya selalu ditinjau manusia.",
+    "Smart Records Center adalah platform tata kelola arsip digital: verifikasi dan pemilahan arsip, klasifikasi arsip, repositori terstruktur per organisasi, pencarian teks lengkap, retensi dan penyusutan, jejak audit yang tidak dapat diubah, serta pelaporan (dashboard) kepatuhan, dengan AI yang usulannya selalu ditinjau manusia.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   // Contact details and entity name supplied by the owner on 2026-10-06 (provisional until the legal entity is registered).
   entity: "Smart Records Center",

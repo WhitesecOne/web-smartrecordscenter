@@ -336,7 +336,53 @@ function AccessMock() {
   )
 }
 
-/* Manajemen Metadata */
+/* Verifikasi & Pemilahan Arsip */
+
+function TriageMock() {
+  const rows = [
+    { doc: "SK Direksi No. 14/2026 tentang SOTK.pdf", kind: "Arsip", why: "Keputusan resmi · bernilai guna", conf: 0.98, status: "arsip" as const },
+    { doc: "Kontrak Sewa Gedung 2026-2028.pdf", kind: "Arsip", why: "Perjanjian hukum · retensi 10 th", conf: 0.96, status: "arsip" as const },
+    { doc: "Notifikasi Pemeliharaan Sistem.eml", kind: "Non-arsip", why: "Pemberitahuan otomatis sistem", conf: 0.95, status: "non" as const },
+    { doc: "Draf Lampiran Rapat (Sementara).docx", kind: "Perlu review", why: "Belum final · cek status penetapan", conf: 0.74, status: "review" as const },
+    { doc: "Bukti Transfer Vendor Termin 2.pdf", kind: "Arsip", why: "Transaksi keuangan · wajib retensi", conf: 0.94, status: "arsip" as const },
+  ]
+  return (
+    <MockFrame title="Verifikasi & Pemilahan Arsip · Antrean Pemilahan">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-2.5 text-xs">
+        <span className="inline-flex items-center gap-2 text-muted-foreground">
+          <AiTag>Pemilahan AI</AiTag>
+          <span>5 dokumen masuk · 3 arsip · 1 non-arsip · 1 perlu review</span>
+        </span>
+      </div>
+      <MockTable
+        minWidth="42rem"
+        rows={rows}
+        cols={[
+          { label: "Dokumen", cell: (r) => (
+            <span className="flex flex-col">
+              <span className="font-medium text-navy">{r.doc}</span>
+              <span className="text-[11.5px] text-muted-foreground">{r.why}</span>
+            </span>
+          ) },
+          { label: "Usulan", cell: (r) => (
+            r.status === "arsip" ? <Badge variant="active">{r.kind}</Badge> :
+            r.status === "non" ? <Badge variant="inactive">{r.kind}</Badge> :
+            <Badge variant="review">{r.kind}</Badge>
+          ) },
+          { label: "Keyakinan", cell: (r) => <Confidence value={r.conf} /> },
+          { label: "Tindakan", cell: (r) => (
+            r.status === "arsip" ? <Fake primary>Teruskan ke klasifikasi</Fake> :
+            r.status === "non" ? <Fake>Karantina</Fake> :
+            <Badge variant="review">Tinjau</Badge>
+          ) },
+        ]}
+      />
+      <p className="border-t border-border bg-mist/60 px-4 py-2.5 text-[12.5px] text-muted-foreground">
+        Dokumen non-arsip dipisahkan ke area karantina sehingga repositori tetap bersih dan jadwal retensi lebih akurat.
+      </p>
+    </MockFrame>
+  )
+}
 
 function MetadataMock() {
   const rows = [
@@ -349,7 +395,7 @@ function MetadataMock() {
     { el: "Hubungan", dc: "dc:relation", req: false, val: "KEU-2025-000098 (draf)" },
   ]
   return (
-    <MockFrame title="Manajemen Metadata · Skema Arsip Keuangan">
+    <MockFrame title="Verifikasi & Pemilahan Arsip · Skema Arsip Keuangan">
       <MockTable
         minWidth="36rem"
         rows={rows}
@@ -375,10 +421,10 @@ function ValidationMock() {
   const rows = [
     { no: "UMM-2026-000301", title: "Surat Masuk Kementerian 0921", miss: "Kode klasifikasi", src: "Unggahan email" },
     { no: "KEU-2026-000412", title: "Bukti Transfer Vendor Agustus", miss: "Pencipta, tanggal", src: "Pemindai lantai 3" },
-    { no: "HKM-2026-000077", title: "Draf Nota Kesepahaman", miss: "Tingkat keamanan", src: "Unggahan manual" },
+    { no: "HKM-2026-000077", title: "Draf Nota Kesepahaman", miss: "Status arsip / non-arsip", src: "Unggahan manual" },
   ]
   return (
-    <MockFrame title="Manajemen Metadata · Antrean Kelengkapan">
+    <MockFrame title="Verifikasi & Pemilahan Arsip · Antrean Kelengkapan">
       <MockTable
         minWidth="36rem"
         rows={rows}
@@ -394,7 +440,7 @@ function ValidationMock() {
         ]}
       />
       <p className="border-t border-border bg-mist/60 px-4 py-2.5 text-[12.5px] text-muted-foreground">
-        Arsip di antrean ini belum dapat ditetapkan sebagai arsip final.
+        Dokumen di antrean ini belum dapat diteruskan ke repositori final.
       </p>
     </MockFrame>
   )
@@ -402,12 +448,12 @@ function ValidationMock() {
 
 function HistoryMock() {
   const rows = [
-    { at: "12 Mar 2026 09.14", field: "Pencipta", from: "(kosong)", to: "Bagian Akuntansi", by: "ai/ekstraksi-v3", why: "Ekstraksi, keyakinan 0,96" },
+    { at: "12 Mar 2026 09.12", field: "Pemilahan", from: "Masuk", to: "Arsip terverifikasi", by: "ai/pemilahan-v2", why: "Surat resmi · keyakinan 0,98" },
+    { at: "12 Mar 2026 09.14", field: "Pencipta", from: "(kosong)", to: "Bagian Akuntansi", by: "ai/ekstraksi-v3", why: "Ekstraksi · keyakinan 0,96" },
     { at: "12 Mar 2026 10.02", field: "Pencipta", from: "Bagian Akuntansi", to: "Divisi Akuntansi", by: "arsiparis#12", why: "Nama unit sesuai SOTK 2026" },
-    { at: "30 Apr 2026 16.40", field: "Status berkas", from: "Terbuka", to: "Ditutup", by: "keuangan#07", why: "Laporan disahkan" },
   ]
   return (
-    <MockFrame title="Manajemen Metadata · Riwayat KEU-2026-000123">
+    <MockFrame title="Verifikasi & Pemilahan Arsip · Riwayat KEU-2026-000123">
       <MockTable
         minWidth="42rem"
         rows={rows}
@@ -822,6 +868,7 @@ function SummaryMock() {
 }
 
 const registry: Record<MockKey, () => React.ReactNode | Promise<React.ReactNode>> = {
+  triage: TriageMock,
   tenants: TenantsMock,
   records: RecordsMock,
   lifecycle: LifecycleMock,

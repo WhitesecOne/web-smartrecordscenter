@@ -32,7 +32,7 @@ export default async function OpengraphImage() {
           Tata kelola arsip digital yang tertib, patuh, dan siap diaudit
         </div>
         <div style={{ display: "flex", marginTop: 28, color: "rgba(255,255,255,0.8)", fontSize: 26, lineHeight: 1.45 }}>
-          Repositori, pencarian, metadata, klasifikasi, retensi, jejak audit, dan pelaporan dalam satu platform.
+          Verifikasi &amp; pemilahan, klasifikasi, repositori, pencarian, retensi, jejak audit, dan pelaporan dalam satu platform.
         </div>
       </div>
 

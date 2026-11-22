@@ -12,7 +12,7 @@ export function SiteFooter() {
     { title: "Modul", links: modules.map((m) => ({ href: `/modul/${m.slug}`, label: m.name })) },
     { title: "Platform", links: platformNav },
     { title: "Industri", links: sectors },
-    { title: "Perusahaan", links: [...companyNav, { href: "/kontak", label: "Kontak" }] },
+    { title: "Perusahaan", links: [{ href: "/portofolio", label: "Portofolio" }, ...companyNav, { href: "/kontak", label: "Kontak" }] },
   ]
   return (
     <footer className="bg-navy text-white">

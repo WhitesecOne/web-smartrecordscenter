@@ -2,11 +2,11 @@
 export const faq: { q: string; a: string }[] = [
   {
     q: "Apa itu Smart Records Center?",
-    a: "Smart Records Center adalah platform tata kelola arsip digital untuk organisasi teregulasi di Indonesia. Platform ini menyatukan tujuh modul: repositori arsip, pencarian dan temu kembali, manajemen metadata, klasifikasi arsip, retensi dan penyusutan, jejak audit, serta pelaporan, di atas satu sumber data dan satu jejak audit.",
+    a: "Smart Records Center adalah platform tata kelola arsip digital untuk organisasi teregulasi di Indonesia. Platform ini menyatukan tujuh modul: verifikasi dan pemilahan arsip, klasifikasi arsip, repositori arsip, pencarian dan temu kembali, retensi dan penyusutan, jejak audit, serta pelaporan (dashboard), di atas satu sumber data dan satu jejak audit.",
   },
   {
     q: "Apakah usulan AI langsung berlaku?",
-    a: "Tidak. AI hanya mengusulkan kode klasifikasi, nilai metadata, atau temuan risiko. Setiap usulan menampilkan sumber dan skor keyakinannya, lalu menunggu konfirmasi arsiparis. Usulan dengan keyakinan di bawah 0,90 ditandai wajib review, dan model, versi, serta peninjaunya tercatat di jejak audit.",
+    a: "Tidak. AI hanya mengusulkan pemilahan dokumen arsip dan non-arsip, kode klasifikasi, nilai metadata, atau temuan risiko. Setiap usulan menampilkan sumber dan skor keyakinannya, lalu menunggu konfirmasi arsiparis. Usulan dengan keyakinan di bawah 0,90 ditandai wajib review, dan model, versi, serta peninjaunya tercatat di jejak audit.",
   },
   {
     q: "Bagaimana data antarorganisasi dipisahkan?",

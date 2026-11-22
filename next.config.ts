@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
       { source: "/modul/ai-otomasi", destination: "/modul", permanent: true },
       { source: "/modul/preservasi-digital", destination: "/modul/repositori-arsip", permanent: true },
       { source: "/modul/audit-bukti", destination: "/modul/jejak-audit", permanent: true },
+      { source: "/modul/manajemen-metadata", destination: "/modul/verifikasi-pemilahan-arsip", permanent: true },
     ]
   },
 }

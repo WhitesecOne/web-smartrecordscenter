@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
+import { ExperienceGrid } from "@/components/experience-grid"
 import { LifecycleTimeline } from "@/components/lifecycle"
 import { DashboardMock } from "@/components/product/dashboard"
 import { JsonLd } from "@/components/json-ld"
@@ -22,7 +23,7 @@ import { ogBase, references, sectors, site } from "@/lib/site"
 
 const title = "Smart Records Center: Platform Tata Kelola Arsip Digital"
 const description =
-  "Platform tata kelola arsip digital: repositori multi-organisasi, pencarian teks lengkap, metadata Dublin Core dan ISO 23081, klasifikasi, retensi dan penyusutan, jejak audit, serta pelaporan kepatuhan."
+  "Platform tata kelola arsip digital: verifikasi dan pemilahan arsip, klasifikasi arsip, repositori multi-organisasi, pencarian teks lengkap, retensi dan penyusutan, jejak audit, serta pelaporan (dashboard) kepatuhan."
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -83,7 +84,7 @@ export default function Home() {
           <motion.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease }}>
             <h1 className="display text-[clamp(2.5rem,4.6vw,3.75rem)] text-white">Tata kelola arsip digital yang tertib, patuh, dan siap diaudit.</h1>
             <p className="lead mt-6 max-w-[54ch] text-white/85">
-              Smart Records Center menyimpan, mencari, mengklasifikasikan, meretensi, dan menyusutkan arsip digital organisasi Anda dalam satu platform. Setiap tindakan
+              Smart Records Center memilah, mengklasifikasikan, menyimpan, mencari, meretensi, dan menyusutkan arsip digital organisasi Anda dalam satu platform. Setiap tindakan
               tercatat di jejak audit yang tidak dapat diubah, dan setiap usulan AI ditinjau arsiparis sebelum berlaku.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row" data-primary-cta>
@@ -346,8 +347,24 @@ export default function Home() {
         </ul>
       </Section>
 
+      {/* Selected professional experience */}
+      <Section tone="mist" id="pengalaman">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            title="Pengalaman profesional di berbagai sektor teregulasi"
+            lead="Smart Records Center dibangun dari pengalaman praktis tim dan penasihat kami dalam pengelolaan rekod, pengendalian dokumen, dan tata kelola informasi di berbagai organisasi."
+          />
+          <Link href="/portofolio" className="link-action shrink-0">
+            Lihat portofolio lengkap <ArrowRightIcon className="size-4" aria-hidden />
+          </Link>
+        </div>
+        <Reveal className="mt-12">
+          <ExperienceGrid />
+        </Reveal>
+      </Section>
+
       {/* Why us, with the standards the design follows. */}
-      <Section tone="mist" id="mengapa">
+      <Section id="mengapa">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <div>
             <SectionHeading title="Dibangun untuk cara kerja kearsipan di Indonesia" />
@@ -378,7 +395,7 @@ export default function Home() {
       </Section>
 
       {/* Questions buyers and auditors ask, answered in full on the page so search engines and AI assistants can quote them. */}
-      <Section id="tanya-jawab">
+      <Section tone="mist" id="tanya-jawab">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <SectionHeading title="Pertanyaan yang sering diajukan" lead="Jawaban singkat untuk pertanyaan yang biasanya muncul dari arsiparis, auditor, dan tim TI sebelum demo." />

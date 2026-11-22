@@ -2,14 +2,15 @@ import {
   ArchiveIcon,
   CalendarClockIcon,
   ChartColumnBigIcon,
+  FileCheck2Icon,
   FileSearchIcon,
   FolderTreeIcon,
   ScrollTextIcon,
-  TagsIcon,
   type LucideIcon,
 } from "lucide-react"
 
 export type MockKey =
+  | "triage"
   | "tenants"
   | "records"
   | "lifecycle"
@@ -46,10 +47,10 @@ export type Photo = { src: string; alt: string }
 
 export type Module = {
   slug:
+    | "verifikasi-pemilahan-arsip"
+    | "klasifikasi-arsip"
     | "repositori-arsip"
     | "pencarian-temu-kembali"
-    | "manajemen-metadata"
-    | "klasifikasi-arsip"
     | "retensi-penyusutan"
     | "jejak-audit"
     | "pelaporan"
@@ -69,6 +70,127 @@ export type Module = {
 }
 
 export const modules: Module[] = [
+  {
+    slug: "verifikasi-pemilahan-arsip",
+    name: "Verifikasi & Pemilahan Arsip",
+    icon: FileCheck2Icon,
+    short: "Melakukan pemilahan dokumen arsip dan non-arsip secara otomatis agar repositori tetap bersih dan retensi lebih akurat.",
+    ai: "AI memilah dokumen arsip dan non-arsip serta mengekstrak metadata dasar dari isi dokumen, lengkap dengan sumber dan skor keyakinannya.",
+    title: "Verifikasi dan pemilahan dokumen arsip dan non-arsip sejak pintu masuk",
+    lead: "Setiap dokumen yang masuk diperiksa status kearsipan dan kelengkapannya sebelum masuk repositori. Dokumen arsip dipisahkan dari dokumen non-arsip secara otomatis dan terverifikasi sehingga repositori tetap bersih dan penghitungan retensi lebih akurat.",
+    metaDescription:
+      "Verifikasi dan pemilahan dokumen arsip serta non-arsip secara otomatis berbantuan AI, validasi kelengkapan metadata Dublin Core dan ISO 23081, ekstraksi isi dokumen, dan riwayat keputusan verifikasi.",
+    heroMock: "triage",
+    features: [
+      {
+        id: "pemilahan-otomatis",
+        name: "Pemilahan dokumen arsip dan non-arsip",
+        desc: "AI membedakan dokumen yang bernilai guna sebagai arsip (surat keputusan, kontrak, laporan resmi, bukti transaksi) dari dokumen non-arsip (draf sementara, notifikasi sistem, brosur, atau lampiran berulang) berdasarkan isi dan aturan organisasi.",
+        points: [
+          "Dokumen non-arsip dipisahkan ke area karantina, tidak pernah dihapus tanpa catatan",
+          "Usulan pemilahan dengan keyakinan di bawah 0,90 ditandai wajib review arsiparis",
+          "Repositori hanya menerima arsip terverifikasi sehingga jadwal retensi lebih akurat",
+        ],
+        mock: "triage",
+        ai: true,
+      },
+      {
+        id: "validasi",
+        name: "Verifikasi kelengkapan dan metadata standar",
+        desc: "Setiap jenis arsip memiliki daftar elemen wajib sesuai skema Dublin Core yang diperluas dan prinsip ISO 23081. Dokumen dengan informasi belum lengkap tidak dapat ditetapkan sebagai arsip final.",
+        points: [
+          "Format tanggal, nomor surat, pencipta, dan kode diperiksa sebelum masuk repositori",
+          "Elemen dipetakan ke Dublin Core dan ISO 23081 agar dapat dipertukarkan",
+          "Dokumen dengan field wajib kosong ditandai di antrean verifikasi",
+        ],
+        mock: "validation",
+      },
+      {
+        id: "ekstraksi",
+        name: "Ekstraksi metadata dari isi dokumen",
+        desc: "AI membaca isi dokumen dan pindaian untuk mengisi nomor surat, tanggal, pengirim, dan perihal. Setiap nilai menyimpan halaman dan posisi teks asalnya serta skor keyakinan.",
+        points: [
+          "Nilai dengan keyakinan di bawah 0,90 ditandai perlu review",
+          "Arsiparis mengonfirmasi atau mengoreksi sebelum nilai berlaku",
+          "Model, versi, dan peninjau tercatat per dokumen",
+        ],
+        mock: "extraction",
+        ai: true,
+      },
+      {
+        id: "riwayat",
+        name: "Riwayat verifikasi dan perubahan",
+        desc: "Setiap keputusan pemilahan (arsip atau non-arsip) serta perubahan nilai metadata menyimpan nilai lama, nilai baru, petugas, waktu, dan alasannya.",
+        points: [
+          "Usulan mesin dan koreksi manusia disimpan berdampingan",
+          "Alasan pemisahan dokumen non-arsip tercatat untuk pemeriksaan",
+          "Riwayat verifikasi dapat diekspor bersama arsipnya",
+        ],
+        mock: "history",
+      },
+    ],
+    rules: [
+      { part: "Pemilahan (AI)", does: "Memisahkan dokumen arsip dan non-arsip", rule: "Di bawah 0,90 wajib review; tidak ada penghapusan otomatis", evidence: "Keputusan pemilahan, skor, dan peninjau" },
+      { part: "Verifikasi kelengkapan", does: "Memeriksa field wajib dan pemetaan Dublin Core / ISO 23081", rule: "Arsip final wajib lengkap", evidence: "Hasil validasi dan versi skema" },
+      { part: "Ekstraksi (AI)", does: "Mengisi metadata dasar dari isi dokumen", rule: "Di bawah 0,90 wajib review sebelum berlaku", evidence: "Model, skor, sumber teks, dan peninjau" },
+      { part: "Riwayat verifikasi", does: "Menyimpan setiap keputusan dan koreksi", rule: "Setiap perubahan menyertakan alasan", evidence: "Nilai lama, nilai baru, dan petugas" },
+    ],
+    related: ["klasifikasi-arsip", "repositori-arsip", "retensi-penyusutan"],
+  },
+  {
+    slug: "klasifikasi-arsip",
+    name: "Klasifikasi Arsip",
+    icon: FolderTreeIcon,
+    short: "Taksonomi klasifikasi arsip yang dapat dikonfigurasi per organisasi.",
+    ai: "AI mengusulkan kode klasifikasi dari isi dan konteks dokumen; arsiparis mengonfirmasi, mengubah, atau menolaknya.",
+    title: "Klasifikasi arsip yang mengikuti struktur dan fungsi organisasi Anda",
+    lead: "Setiap organisasi menyusun taksonomi klasifikasinya sendiri: fungsi, kegiatan, dan transaksi. Kode klasifikasi menjadi alamat tetap arsip dan membawa aturan retensi serta tingkat keamanannya.",
+    metaDescription:
+      "Taksonomi klasifikasi arsip yang dapat dikonfigurasi per organisasi, versi skema yang tercatat, dan usulan klasifikasi berbantuan AI dengan konfirmasi arsiparis.",
+    heroMock: "bcs",
+    features: [
+      {
+        id: "taksonomi",
+        name: "Taksonomi per organisasi",
+        desc: "Kode klasifikasi hierarkis disusun berdasarkan fungsi, kegiatan, dan transaksi. Struktur dapat diimpor dari klasifikasi arsip yang sudah berlaku.",
+        points: [
+          "Kedalaman hierarki dan pola kode mengikuti kebutuhan organisasi",
+          "Setiap kode membawa retensi, nasib akhir, dan tingkat keamanan",
+          "Arsip tanpa kode klasifikasi tidak dapat ditetapkan sebagai arsip final",
+        ],
+        mock: "bcs",
+      },
+      {
+        id: "versi",
+        name: "Perubahan skema yang tercatat",
+        desc: "Penambahan, penggabungan, dan penonaktifan kode berlaku dengan tanggal efektif. Arsip lama tetap memakai kode yang berlaku saat dibuat.",
+        points: [
+          "Perubahan kode tercatat: siapa, kapan, dan alasannya",
+          "Pemetaan kode lama ke kode baru dapat dijalankan secara bertahap",
+          "Riwayat versi skema tersedia untuk pemeriksaan",
+        ],
+        mock: "versions",
+      },
+      {
+        id: "usulan-ai",
+        name: "Usulan klasifikasi",
+        desc: "AI membaca isi dan konteks dokumen lalu mengusulkan kode klasifikasi. Usulan tidak berlaku sebelum dikonfirmasi arsiparis.",
+        points: [
+          "Usulan dengan keyakinan di bawah 0,90 ditandai perlu review",
+          "Arsiparis dapat mengubah atau menolak usulan",
+          "Model, versi, skor, dan peninjau tercatat per arsip",
+        ],
+        mock: "classify",
+        ai: true,
+      },
+    ],
+    rules: [
+      { part: "Taksonomi", does: "Memberi kode klasifikasi pada setiap arsip", rule: "Arsip final wajib memiliki kode", evidence: "Kode dan tanggal penetapan" },
+      { part: "Versi skema", does: "Mengelola perubahan kode", rule: "Perubahan berlaku dengan tanggal efektif", evidence: "Riwayat perubahan dan alasannya" },
+      { part: "Usulan (AI)", does: "Mengusulkan kode dari isi dokumen", rule: "Menunggu konfirmasi; di bawah 0,90 wajib review", evidence: "Model, versi, skor, dan peninjau" },
+    ],
+    related: ["verifikasi-pemilahan-arsip", "repositori-arsip", "retensi-penyusutan"],
+  },
   {
     slug: "repositori-arsip",
     name: "Repositori Arsip",
@@ -145,7 +267,7 @@ export const modules: Module[] = [
       { part: "Keutuhan", does: "Memeriksa hash dan menjaga salinan", rule: "Selisih hash membuka insiden pemulihan", evidence: "Hasil pemeriksaan per berkas" },
       { part: "Duplikat (AI)", does: "Menautkan berkas identik dan mirip", rule: "Tidak ada penghapusan otomatis", evidence: "Pasangan duplikat dan keputusannya" },
     ],
-    related: ["klasifikasi-arsip", "retensi-penyusutan", "jejak-audit"],
+    related: ["verifikasi-pemilahan-arsip", "klasifikasi-arsip", "pencarian-temu-kembali"],
   },
   {
     slug: "pencarian-temu-kembali",
@@ -211,127 +333,7 @@ export const modules: Module[] = [
       { part: "Hak akses", does: "Menyaring hasil sebelum ditampilkan", rule: "Tingkat keamanan membatasi hasil", evidence: "Log pencarian atas arsip rahasia" },
       { part: "Pencarian makna (AI)", does: "Mencocokkan maksud kalimat", rule: "Hasil tetap disaring hak akses", evidence: "Kueri dan arsip yang dibuka" },
     ],
-    related: ["manajemen-metadata", "klasifikasi-arsip", "jejak-audit"],
-  },
-  {
-    slug: "manajemen-metadata",
-    name: "Manajemen Metadata",
-    icon: TagsIcon,
-    short: "Skema metadata sesuai standar Dublin Core yang diperluas dan ISO 23081.",
-    ai: "AI mengambil nomor surat, tanggal, pengirim, dan perihal langsung dari dokumen, lengkap dengan sumber dan skor keyakinannya.",
-    title: "Metadata yang lengkap, konsisten, dan sesuai standar sejak arsip diterima",
-    lead: "Skema metadata mengikuti elemen Dublin Core yang diperluas untuk kebutuhan kearsipan dan prinsip ISO 23081. Field wajib divalidasi, perubahan tercatat, dan AI membantu mengisi nilai dari isi dokumen.",
-    metaDescription:
-      "Manajemen metadata arsip dengan skema Dublin Core yang diperluas dan ISO 23081, validasi field wajib, riwayat perubahan, dan ekstraksi metadata berbantuan AI.",
-    heroMock: "metadata",
-    features: [
-      {
-        id: "skema",
-        name: "Skema metadata standar",
-        desc: "Elemen Dublin Core seperti judul, pencipta, tanggal, subjek, dan format diperluas dengan elemen kearsipan: kode klasifikasi, retensi, tingkat keamanan, dan hubungan antararsip.",
-        points: [
-          "Elemen dipetakan ke Dublin Core agar dapat dipertukarkan",
-          "Metadata manajemen arsip mengikuti prinsip ISO 23081",
-          "Organisasi dapat menambah elemen sendiri tanpa merusak skema dasar",
-        ],
-        mock: "metadata",
-      },
-      {
-        id: "validasi",
-        name: "Field wajib dan validasi",
-        desc: "Setiap jenis arsip memiliki daftar field wajib dan format nilai. Arsip dengan metadata belum lengkap tidak dapat ditetapkan sebagai arsip final.",
-        points: [
-          "Format tanggal, nomor surat, dan kode diperiksa saat diisi",
-          "Daftar nilai baku untuk unit, jenis, dan tingkat keamanan",
-          "Arsip dengan field wajib kosong ditandai di antrean kerja",
-        ],
-        mock: "validation",
-      },
-      {
-        id: "riwayat",
-        name: "Riwayat perubahan metadata",
-        desc: "Setiap perubahan nilai metadata menyimpan nilai lama, nilai baru, pengubah, waktu, dan alasannya.",
-        points: [
-          "Nilai dari mesin dan koreksi manusia disimpan berdampingan",
-          "Perubahan pada arsip inaktif memerlukan persetujuan",
-          "Riwayat dapat diekspor bersama arsipnya",
-        ],
-        mock: "history",
-      },
-      {
-        id: "ekstraksi",
-        name: "Ekstraksi metadata",
-        desc: "AI mengisi field dari isi dokumen. Setiap nilai menyimpan halaman dan posisi teks asalnya serta skor keyakinan.",
-        points: [
-          "Nilai dengan keyakinan di bawah 0,90 ditandai perlu review",
-          "Arsiparis mengonfirmasi atau mengoreksi sebelum nilai berlaku",
-          "Model, versi, dan peninjau tercatat per arsip",
-        ],
-        mock: "extraction",
-        ai: true,
-      },
-    ],
-    rules: [
-      { part: "Skema", does: "Menetapkan elemen metadata", rule: "Elemen dipetakan ke Dublin Core dan ISO 23081", evidence: "Versi skema yang berlaku" },
-      { part: "Validasi", does: "Memeriksa field wajib dan format", rule: "Arsip final wajib lengkap", evidence: "Hasil validasi per arsip" },
-      { part: "Riwayat", does: "Menyimpan setiap perubahan nilai", rule: "Perubahan menyertakan alasan", evidence: "Nilai lama, nilai baru, dan pengubah" },
-      { part: "Ekstraksi (AI)", does: "Mengisi field dari isi dokumen", rule: "Di bawah 0,90 wajib review", evidence: "Model, skor, sumber, dan peninjau" },
-    ],
-    related: ["klasifikasi-arsip", "pencarian-temu-kembali", "repositori-arsip"],
-  },
-  {
-    slug: "klasifikasi-arsip",
-    name: "Klasifikasi Arsip",
-    icon: FolderTreeIcon,
-    short: "Taksonomi klasifikasi arsip yang dapat dikonfigurasi per organisasi.",
-    ai: "AI mengusulkan kode klasifikasi dari isi dan konteks dokumen; arsiparis mengonfirmasi, mengubah, atau menolaknya.",
-    title: "Klasifikasi arsip yang mengikuti struktur dan fungsi organisasi Anda",
-    lead: "Setiap organisasi menyusun taksonomi klasifikasinya sendiri: fungsi, kegiatan, dan transaksi. Kode klasifikasi menjadi alamat tetap arsip dan membawa aturan retensi serta tingkat keamanannya.",
-    metaDescription:
-      "Taksonomi klasifikasi arsip yang dapat dikonfigurasi per organisasi, versi skema yang tercatat, dan usulan klasifikasi berbantuan AI dengan konfirmasi arsiparis.",
-    heroMock: "bcs",
-    features: [
-      {
-        id: "taksonomi",
-        name: "Taksonomi per organisasi",
-        desc: "Kode klasifikasi hierarkis disusun berdasarkan fungsi, kegiatan, dan transaksi. Struktur dapat diimpor dari klasifikasi arsip yang sudah berlaku.",
-        points: [
-          "Kedalaman hierarki dan pola kode mengikuti kebutuhan organisasi",
-          "Setiap kode membawa retensi, nasib akhir, dan tingkat keamanan",
-          "Arsip tanpa kode klasifikasi tidak dapat ditetapkan sebagai arsip final",
-        ],
-        mock: "bcs",
-      },
-      {
-        id: "versi",
-        name: "Perubahan skema yang tercatat",
-        desc: "Penambahan, penggabungan, dan penonaktifan kode berlaku dengan tanggal efektif. Arsip lama tetap memakai kode yang berlaku saat dibuat.",
-        points: [
-          "Perubahan kode tercatat: siapa, kapan, dan alasannya",
-          "Pemetaan kode lama ke kode baru dapat dijalankan secara bertahap",
-          "Riwayat versi skema tersedia untuk pemeriksaan",
-        ],
-        mock: "versions",
-      },
-      {
-        id: "usulan-ai",
-        name: "Usulan klasifikasi",
-        desc: "AI membaca isi dan konteks dokumen lalu mengusulkan kode klasifikasi. Usulan tidak berlaku sebelum dikonfirmasi arsiparis.",
-        points: [
-          "Usulan dengan keyakinan di bawah 0,90 ditandai perlu review",
-          "Arsiparis dapat mengubah atau menolak usulan",
-          "Model, versi, skor, dan peninjau tercatat per arsip",
-        ],
-        mock: "classify",
-        ai: true,
-      },
-    ],
-    rules: [
-      { part: "Taksonomi", does: "Memberi kode klasifikasi pada setiap arsip", rule: "Arsip final wajib memiliki kode", evidence: "Kode dan tanggal penetapan" },
-      { part: "Versi skema", does: "Mengelola perubahan kode", rule: "Perubahan berlaku dengan tanggal efektif", evidence: "Riwayat perubahan dan alasannya" },
-      { part: "Usulan (AI)", does: "Mengusulkan kode dari isi dokumen", rule: "Menunggu konfirmasi; di bawah 0,90 wajib review", evidence: "Model, versi, skor, dan peninjau" },
-    ],
-    related: ["retensi-penyusutan", "manajemen-metadata", "repositori-arsip"],
+    related: ["repositori-arsip", "klasifikasi-arsip", "jejak-audit"],
   },
   {
     slug: "retensi-penyusutan",
@@ -426,7 +428,7 @@ export const modules: Module[] = [
       {
         id: "log-immutable",
         name: "Log yang tidak dapat diubah",
-        desc: "Setiap kejadian dicatat: pembuatan, pembukaan, perubahan metadata, perpindahan status, penyusutan, dan keputusan AI. Setiap entri menyimpan hash entri sebelumnya.",
+        desc: "Setiap kejadian dicatat: pemilahan, pembuatan, pembukaan, perubahan metadata, perpindahan status, penyusutan, dan keputusan AI. Setiap entri menyimpan hash entri sebelumnya.",
         points: [
           "Entri tidak dapat diubah atau dihapus, termasuk oleh administrator",
           "Perubahan di tengah rantai langsung terdeteksi saat verifikasi",
@@ -468,7 +470,7 @@ export const modules: Module[] = [
   },
   {
     slug: "pelaporan",
-    name: "Pelaporan",
+    name: "Pelaporan (Dashboard)",
     icon: ChartColumnBigIcon,
     short: "Dasbor kepatuhan dan laporan operasional untuk pelanggan dan regulator.",
     ai: "AI menyusun draf ringkasan temuan periode berjalan untuk ditinjau sebelum laporan dikirim.",

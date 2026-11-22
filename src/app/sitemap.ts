@@ -13,6 +13,7 @@ const paths = [
   "/modul",
   ...modules.map((m) => `/modul/${m.slug}`),
   "/industri",
+  "/portofolio",
   "/mengapa-kami",
   "/tentang-kami",
   "/kontak",
@@ -21,7 +22,7 @@ const paths = [
 ]
 
 // Date of the last content revision; bump it when page copy changes.
-const lastModified = new Date("2026-11-15")
+const lastModified = new Date("2026-11-22")
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return paths.map((p) => ({ url: new URL(p, site.url).href, lastModified }))

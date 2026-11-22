@@ -141,6 +141,12 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
+                <NavigationMenuLink render={<Link href="/portofolio" />} aria-current={is("/portofolio") ? "page" : undefined} data-active={is("/portofolio")} className={trigger}>
+                  Portofolio
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
                 <NavigationMenuTrigger className={trigger} data-active={inCompany}>
                   Perusahaan
                 </NavigationMenuTrigger>
@@ -179,6 +185,9 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
                     <MobileGroup title="Industri" links={[...sectors, { href: "/industri", label: "Semua industri" }]} />
                     <MobileGroup title="Perusahaan" links={companyNav} />
                   </Accordion>
+                  <Link href="/portofolio" className="flex min-h-12 items-center border-b border-border text-base font-semibold text-navy">
+                    Portofolio
+                  </Link>
                   <Link href="/kontak" className="flex min-h-12 items-center border-b border-border text-base font-semibold text-navy">
                     Kontak
                   </Link>

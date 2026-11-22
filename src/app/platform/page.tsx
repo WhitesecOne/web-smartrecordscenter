@@ -9,7 +9,7 @@ import { moduleBySlug, type Module } from "@/lib/modules"
 import { ogBase, platformNav, references } from "@/lib/site"
 
 const description =
-  "Ikhtisar Smart Records Center: tujuh modul tata kelola arsip digital di atas satu sumber data, dari repositori, pencarian, metadata, dan klasifikasi sampai retensi, jejak audit, dan pelaporan."
+  "Ikhtisar Smart Records Center: tujuh modul tata kelola arsip digital di atas satu sumber data, dari verifikasi dan pemilahan arsip, klasifikasi, dan repositori sampai pencarian, retensi, jejak audit, dan pelaporan (dashboard)."
 
 export const metadata: Metadata = {
   title: "Ikhtisar Platform",
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
 }
 
 const flow: { slug: Module["slug"]; name: string; text: string }[] = [
-  { slug: "repositori-arsip", name: "Diterima", text: "Arsip masuk dari unggahan, email, pemindai, atau API ke ruang data organisasi. Nomor arsip dibuat dan hash berkas dicatat." },
-  { slug: "manajemen-metadata", name: "Dilengkapi", text: "AI mengisi metadata dari isi dokumen, lalu field wajib divalidasi terhadap skema Dublin Core yang diperluas." },
+  { slug: "verifikasi-pemilahan-arsip", name: "Diverifikasi dan dipilah", text: "Dokumen masuk dari unggahan, email, pemindai, atau API. AI memilah dokumen arsip dan non-arsip serta memvalidasi kelengkapan metadata dasar." },
   { slug: "klasifikasi-arsip", name: "Diklasifikasikan", text: "Kode klasifikasi dikonfirmasi arsiparis dan membawa retensi, tingkat keamanan, serta hak akses." },
+  { slug: "repositori-arsip", name: "Disimpan di repositori", text: "Arsip terverifikasi masuk ke ruang data organisasi dengan nomor arsip, hash berkas, dan status siklus hidup yang jelas." },
   { slug: "pencarian-temu-kembali", name: "Ditemukan kembali", text: "Isi dan metadata diindeks. Pengguna menemukan arsip dengan kata kunci, filter, atau kalimat biasa, sesuai hak aksesnya." },
   { slug: "retensi-penyusutan", name: "Diretensi dan disusutkan", text: "Mesin aturan memindahkan arsip ke inaktif dan menyusun usulan penyusutan yang menunggu persetujuan berjenjang." },
-  { slug: "jejak-audit", name: "Dibuktikan", text: "Setiap langkah masuk log audit berantai hash, lalu dirangkum di dasbor kepatuhan dan laporan berkala." },
+  { slug: "jejak-audit", name: "Dibuktikan dan dilaporkan", text: "Setiap langkah masuk log audit berantai hash, lalu dirangkum di dasbor kepatuhan dan laporan berkala." },
 ]
 
 const vocab = [

@@ -7,9 +7,9 @@ const bySlug = (s: Module["slug"]) => modules.find((m) => m.slug === s)!
 
 // Three layers in the order a record meets them: it arrives and is put in order, it is used and kept, it is proven.
 const layers: { name: string; desc: string; slugs: Module["slug"][] }[] = [
-  { name: "Diterima dan ditata", desc: "Arsip masuk, diberi metadata, dan diklasifikasikan.", slugs: ["repositori-arsip", "manajemen-metadata", "klasifikasi-arsip"] },
+  { name: "Diterima dan ditata", desc: "Dokumen dipilah, diklasifikasikan, dan disimpan di repositori.", slugs: ["verifikasi-pemilahan-arsip", "klasifikasi-arsip", "repositori-arsip"] },
   { name: "Dipakai dan dijaga", desc: "Arsip ditemukan kembali dan dikelola sesuai retensinya.", slugs: ["pencarian-temu-kembali", "retensi-penyusutan"] },
-  { name: "Dibuktikan", desc: "Setiap aksi tercatat dan dilaporkan.", slugs: ["jejak-audit", "pelaporan"] },
+  { name: "Dibuktikan", desc: "Setiap aksi tercatat dan dilaporkan di dasbor kepatuhan.", slugs: ["jejak-audit", "pelaporan"] },
 ]
 
 function Node({ m }: { m: Module }) {

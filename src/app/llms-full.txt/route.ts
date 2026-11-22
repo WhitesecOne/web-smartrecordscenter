@@ -1,5 +1,6 @@
 import { faq } from "@/lib/faq"
 import { modules } from "@/lib/modules"
+import { experienceDetails, experienceDisclaimer } from "@/lib/portfolio"
 import { companyNav, platformNav, references, sectors, site } from "@/lib/site"
 
 export const dynamic = "force-static"
@@ -22,7 +23,12 @@ export function GET() {
     `- Minta demo: ${abs("/kontak")}`,
     "",
     "## Halaman utama",
+    `- [Portofolio & Pengalaman Profesional](${abs("/portofolio")}): pengalaman profesional terpilih, pendekatan, dan komitmen Smart Records Center.`,
     ...[...platformNav, ...companyNav].map((l) => `- [${l.label}](${abs(l.href)}): ${l.desc}`),
+    "",
+    "## Pengalaman profesional terpilih",
+    ...experienceDetails.map((e) => `- ${e.organization} (${e.sector}): ${e.scope}`),
+    experienceDisclaimer,
     "",
     "## Industri",
     ...sectors.map((s) => `- [${s.label}](${abs(s.href)}): ${s.desc}`),

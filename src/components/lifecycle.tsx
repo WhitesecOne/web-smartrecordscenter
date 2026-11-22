@@ -8,8 +8,8 @@ const stages = [
   {
     year: "12 Mar 2026",
     name: "Diterima",
-    desc: "Arsip masuk ke ruang data organisasi, diberi nomor, metadatanya diisi dan divalidasi, lalu diklasifikasikan.",
-    modules: "Repositori · Metadata · Klasifikasi",
+    desc: "Dokumen dipilah dari non-arsip, diverifikasi kelengkapannya, diklasifikasikan, lalu disimpan ke repositori organisasi.",
+    modules: "Verifikasi & Pemilahan · Klasifikasi · Repositori",
     tone: "bg-white text-navy border-navy/30",
   },
   {
