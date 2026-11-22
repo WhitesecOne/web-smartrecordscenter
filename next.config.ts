@@ -17,8 +17,6 @@ const nextConfig: NextConfig = {
   // URLs from the earlier five-module structure, kept alive for anyone who saved or shared them.
   async redirects() {
     return [
-      // The demo form and its thank-you page were replaced by a direct email contact.
-      { source: "/terima-kasih", destination: "/kontak", permanent: true },
       { source: "/solusi", destination: "/industri", permanent: true },
       { source: "/modul/tata-kelola-informasi", destination: "/modul/retensi-penyusutan", permanent: true },
       { source: "/modul/ai-otomasi", destination: "/modul", permanent: true },

@@ -8,11 +8,12 @@ import { pageGraph } from "@/lib/seo"
 import { ogBase, site } from "@/lib/site"
 
 import { CopyEmail } from "./copy-email"
+import { DemoRequestForm } from "./demo-form"
 
 export const metadata: Metadata = {
   title: "Minta Demo",
   description:
-    "Minta demo Smart Records Center lewat email. Kami tunjukkan verifikasi dan pemilahan arsip, klasifikasi, repositori, pencarian, retensi dan penyusutan, jejak audit, serta pelaporan (dashboard) memakai skenario arsip organisasi Anda.",
+    "Minta demo Smart Records Center. Kami tunjukkan verifikasi dan pemilahan arsip, klasifikasi, repositori, pencarian, retensi dan penyusutan, jejak audit, serta pelaporan (dashboard) memakai skenario arsip organisasi Anda.",
   alternates: { canonical: "/kontak" },
   openGraph: { ...ogBase, url: "/kontak", title: "Minta demo Smart Records Center" },
 }
@@ -25,9 +26,6 @@ const agenda = [
   "Opsi penerapan dan integrasi dengan sistem yang sudah Anda pakai.",
 ]
 
-const include = ["Nama, jabatan, dan nama organisasi Anda", "Sektor organisasi (pemerintah, BUMN, keuangan, korporasi)", "Kebutuhan arsip Anda secara umum, dan modul yang paling Anda butuhkan"]
-
-// Opens the visitor's mail app with the subject and an outline already filled in.
 const subject = "Permintaan demo Smart Records Center"
 const body = "Halo tim Smart Records Center,\n\nNama:\nJabatan:\nOrganisasi:\nSektor:\n\nKebutuhan arsip kami:\n\nTerima kasih."
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
@@ -35,82 +33,58 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body
 export default function KontakPage() {
   return (
     <>
-      <JsonLd data={pageGraph("ContactPage", "/kontak", "Minta Demo", "Minta demo Smart Records Center atau hubungi kami langsung lewat email.")} />
+      <JsonLd data={pageGraph("ContactPage", "/kontak", "Minta Demo", "Minta demo Smart Records Center atau hubungi kami langsung.")} />
       <PageHero
         crumbs={[{ label: "Kontak" }]}
         title="Minta demo Smart Records Center"
-        lead="Kirim email singkat tentang kebutuhan arsip organisasi Anda. Kami siapkan demo yang mengikuti alur kerja Anda, bukan presentasi umum."
+        lead="Isi formulir singkat atau kirim email langsung tentang kebutuhan arsip organisasi Anda. Kami siapkan sesi demo yang mengikuti alur kerja Anda, bukan presentasi umum."
         actions={
           <div data-primary-cta className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" render={<a href={mailto} />} nativeButton={false}>
+            <Button size="lg" render={<a href={mailto} />} nativeButton={false} className="gap-2">
               <MailIcon aria-hidden />
-              Kirim email ke {site.email}
+              Kirim email langsung ke {site.email}
             </Button>
           </div>
         }
       />
 
       <Section className="py-14 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-10">
-            <div>
-              <h2 className="text-2xl font-bold tracking-[-0.02em]">Yang kita bahas dalam demo</h2>
-              <ol className="mt-6 flex flex-col gap-3">
-                {agenda.map((item, i) => (
-                  <li key={item} className="flex gap-3.5 rounded-xl border border-border bg-white p-4 leading-relaxed shadow-card">
-                    <span className="code flex size-7 shrink-0 items-center justify-center rounded-md bg-brand-wash text-xs font-semibold text-brand-ink">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[0.9375rem]">{item}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+          <div className="flex flex-col gap-8">
+            <DemoRequestForm />
+            <p className="flex gap-3 rounded-xl border border-border bg-mist p-4 text-[0.9375rem] leading-relaxed">
+              <ShieldAlertIcon className="mt-0.5 size-5 shrink-0 text-navy" aria-hidden />
+              <span>
+                <strong className="font-semibold text-navy">Jangan lampirkan dokumen rahasia di komunikasi pertama.</strong> Cukup jelaskan jenis arsip dan
+                kebutuhannya secara umum.
+              </span>
+            </p>
           </div>
 
-          <div className="flex flex-col gap-8">
-            <div className="rounded-xl border border-border bg-white p-6 shadow-card sm:p-8">
-              <h2 className="text-xl font-bold tracking-[-0.02em]">Cara menghubungi kami</h2>
-              <p className="mt-3 leading-relaxed">
-                Tulis email ke{" "}
-                <a href={`mailto:${site.email}`} className="font-semibold break-all text-brand underline">
-                  {site.email}
-                </a>
-                . Tombol di atas membuka aplikasi email Anda dengan subjek dan kerangka isi yang sudah terisi. Bila tidak terbuka, salin alamatnya.
-              </p>
-              <p className="mt-5 text-sm font-semibold text-navy">Sebaiknya sebutkan:</p>
-              <ul className="mt-2 flex flex-col gap-2 text-[0.9375rem]">
-                {include.map((item) => (
-                  <li key={item} className="flex gap-3 leading-relaxed">
+          <div className="flex flex-col gap-10">
+            <div>
+              <h2 className="font-heading text-2xl font-bold tracking-[-0.02em] text-navy">Yang dibahas dalam demo</h2>
+              <ul className="mt-5 divide-y divide-border border-y border-border">
+                {agenda.map((item) => (
+                  <li key={item} className="flex gap-3 py-4 text-[0.9375rem] leading-relaxed">
                     <CheckIcon className="mt-1 size-4 shrink-0 text-brand" aria-hidden />
                     {item}
                   </li>
                 ))}
               </ul>
-              <div className="mt-6">
-                <CopyEmail email={site.email} />
-              </div>
             </div>
 
-            <p className="flex gap-3 rounded-lg bg-mist p-4 text-[0.9375rem] leading-relaxed">
-              <ShieldAlertIcon className="mt-0.5 size-5 shrink-0 text-navy" aria-hidden />
-              <span>
-                <strong className="font-semibold text-navy">Jangan lampirkan dokumen rahasia di email pertama.</strong> Cukup jelaskan jenis arsip dan
-                kebutuhannya secara umum.
-              </span>
-            </p>
-
-            <div id="kontak-langsung" className="border-t border-border pt-8">
-              <h2 className="text-xl font-bold tracking-[-0.02em]">Kontak langsung</h2>
+            <div id="kontak-langsung" className="rounded-xl border border-border bg-mist/60 p-6">
+              <h2 className="font-heading text-xl font-bold tracking-[-0.02em] text-navy">Kontak langsung</h2>
               <dl className="mt-5 grid gap-4 text-[0.9375rem]">
                 <div>
-                  <dt className="text-sm text-muted-foreground">Alamat</dt>
+                  <dt className="text-sm text-muted-foreground">Alamat kantor</dt>
                   <dd className="mt-0.5 font-medium text-navy">{site.address}</dd>
                 </div>
                 <div>
                   <dt className="text-sm text-muted-foreground">Email</dt>
                   <dd className="mt-0.5">
-                    <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center font-medium text-brand underline">
+                    <a href={`mailto:${site.email}`} className="inline-flex min-h-9 items-center font-semibold text-brand underline">
                       {site.email}
                     </a>
                   </dd>
@@ -118,12 +92,15 @@ export default function KontakPage() {
                 <div>
                   <dt className="text-sm text-muted-foreground">Telepon</dt>
                   <dd className="mt-0.5">
-                    <a href={`tel:${site.phone.replace(/[^\d+]/g, "")}`} className="inline-flex min-h-11 items-center font-medium text-brand underline">
+                    <a href={`tel:${site.phone.replace(/[^\d+]/g, "")}`} className="inline-flex min-h-9 items-center font-semibold text-brand underline">
                       {site.phone}
                     </a>
                   </dd>
                 </div>
               </dl>
+              <div className="mt-5 border-t border-border pt-5">
+                <CopyEmail email={site.email} />
+              </div>
             </div>
           </div>
         </div>

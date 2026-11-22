@@ -38,7 +38,7 @@ const sections: LegalSection[] = [
     title: "Data yang kami kumpulkan",
     body: (
       <>
-        <p>Situs ini tidak memiliki formulir. Saat Anda meminta demo atau menghubungi kami lewat email, kami menerima data yang Anda tulis sendiri di email, misalnya:</p>
+        <p>Saat Anda mengisi formulir permintaan demo atau menghubungi kami lewat email, kami menerima data yang Anda sampaikan sendiri, misalnya:</p>
         <ul>
           <li>nama;</li>
           <li>nama organisasi;</li>

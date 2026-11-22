@@ -8,9 +8,10 @@ export const metadata: Metadata = {
 }
 
 const suggestions = [
-  { href: "/", label: "Beranda", desc: "Ringkasan Smart Records Center." },
+  { href: "/", label: "Beranda", desc: "Ringkasan Smart Records Center dan pratinjau dasbor interaktif." },
+  { href: "/modul", label: "Modul", desc: "Tujuh modul tata kelola arsip digital, dari verifikasi & pemilahan sampai pelaporan (dashboard)." },
   { href: "/platform", label: "Platform", desc: "Tujuh modul di atas satu sumber data dan satu jejak audit." },
-  { href: "/modul", label: "Modul", desc: "Tujuh modul tata kelola arsip digital, dari repositori sampai pelaporan." },
+  { href: "/portofolio", label: "Portofolio", desc: "Pengalaman profesional terpilih tim dan penasihat kami." },
   { href: "/industri", label: "Industri", desc: "Pemerintah, BUMN dan BUMD, perbankan, dan korporasi." },
   { href: "/kontak", label: "Kontak", desc: "Minta demo atau hubungi kami langsung." },
 ]

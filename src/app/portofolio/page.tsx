@@ -115,15 +115,12 @@ export default function PortofolioPage() {
             <p className="lead mt-4 text-body">
               Empat prinsip kerja yang menyatukan kebijakan kearsipan, kepatuhan regulasi, dan teknologi dalam satu jalur pengelolaan informasi menyeluruh.
             </p>
-            <div className="mt-8 grid gap-5 sm:grid-cols-2">
-              {approachPillars.map((pillar, i) => (
-                <div key={pillar.title} className="rounded-xl border border-border bg-white p-6 shadow-card">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="code text-xs font-semibold text-brand">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="rounded-md bg-brand-wash px-2 py-0.5 text-[11.5px] font-semibold text-brand-ink">{pillar.subtitle}</span>
-                  </div>
-                  <h4 className="mt-3 font-heading text-lg font-bold text-navy">{pillar.title}</h4>
-                  <p className="mt-2 text-[0.9rem] leading-relaxed text-body">{pillar.text}</p>
+            <div className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+              {approachPillars.map((pillar) => (
+                <div key={pillar.title} className="border-t-2 border-navy pt-5">
+                  <h4 className="font-heading text-lg font-bold text-navy">{pillar.title}</h4>
+                  <p className="mt-0.5 text-[13px] font-semibold text-brand-ink">{pillar.subtitle}</p>
+                  <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-body">{pillar.text}</p>
                 </div>
               ))}
             </div>
