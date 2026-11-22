@@ -22,7 +22,7 @@ export function ExtractionMock() {
   const mark = (k: Key | Key[]) => cn("rounded-[3px] transition-colors", ([] as Key[]).concat(k).includes(active as Key) && "bg-brand-wash ring-2 ring-brand")
 
   return (
-    <MockFrame title="Verifikasi & Pemilahan Arsip · Ekstraksi AI" bodyClassName="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+    <MockFrame title="Verifikasi & Pemilahan Arsip · Ekstraksi AI" bodyClassName="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]" interactive>
       <div className="border-b border-border bg-mist/70 p-4 md:border-r md:border-b-0">
         <div className="rounded-md border border-border bg-white p-4 font-serif text-[12.5px] leading-relaxed text-navy shadow-[0_1px_3px_rgb(11_36_71/0.08)]">
           <div className="border-b-2 border-double border-navy pb-2 text-center font-sans">

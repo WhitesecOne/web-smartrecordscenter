@@ -6,7 +6,7 @@ import { ExperienceGrid } from "@/components/experience-grid"
 import { JsonLd } from "@/components/json-ld"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
-import { approachPillars, experienceDisclaimer, experienceDetails } from "@/lib/portfolio"
+import { approachPillars, experienceDetails, experienceDisclaimer } from "@/lib/portfolio"
 import { pageGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 const lifecycleFocus = [
-  "Penciptaan, verifikasi, dan klasifikasi informasi sejak pintu masuk",
+  "Penciptaan, verifikasi pemilahan, dan klasifikasi informasi sejak pintu masuk",
   "Penggunaan, pengendalian dokumen, dan hak akses berbasis peran",
   "Retensi, penilaian (appraisal), dan penyusutan dengan persetujuan berjenjang",
   "Preservasi informasi digital jangka panjang yang siap diaudit",
@@ -46,34 +46,34 @@ export default function PortofolioPage() {
         photo={{ src: "/images/glass-dusk.webp", alt: "Fasad gedung perkantoran berdinding kaca saat senja" }}
       />
 
-      {/* Selected professional experience: logo grid + structured scope table */}
+      {/* Selected professional experience: logo grid + structured scope matrix */}
       <Section id="pengalaman">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-12">
           <SectionHeading
             title="Pengalaman profesional terpilih"
             lead="Pengalaman profesional tim dan penasihat Smart Records Center mencakup proyek dan pekerjaan terkait manajemen rekod, pengendalian dokumen, tata kelola kearsipan, pusat arsip, serta arsip digital di berbagai sektor."
           />
-          <p className="text-[0.9375rem] leading-relaxed text-body">
+          <div className="rounded-xl border border-border bg-mist/70 p-5 text-[0.9375rem] leading-relaxed text-body">
             Kami menggabungkan keahlian profesional, standar internasional, kepatuhan regulasi, dan teknologi digital untuk membantu organisasi mengubah dokumen dan rekod
             menjadi aset informasi bernilai jangka panjang.
-          </p>
+          </div>
         </div>
 
         <Reveal className="mt-12">
           <ExperienceGrid showDisclaimer={false} />
         </Reveal>
 
-        <div className="mt-12 overflow-hidden rounded-xl border border-border bg-white">
-          <div aria-hidden className="hidden grid-cols-[minmax(0,4fr)_minmax(0,3fr)_minmax(0,5fr)] gap-6 border-b border-border bg-mist px-5 py-3 text-sm font-semibold text-navy lg:grid">
+        <div className="mt-12 overflow-hidden rounded-xl border border-border bg-white shadow-card">
+          <div aria-hidden className="hidden grid-cols-[minmax(0,4fr)_minmax(0,3fr)_minmax(0,5fr)] gap-6 border-b border-border bg-mist px-5 py-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase lg:grid">
             <span>Organisasi</span>
             <span>Sektor</span>
             <span>Ruang lingkup pengalaman</span>
           </div>
           <ul className="divide-y divide-border">
             {experienceDetails.map((item) => (
-              <li key={item.organization} className="grid gap-2 px-5 py-5 lg:grid-cols-[minmax(0,4fr)_minmax(0,3fr)_minmax(0,5fr)] lg:gap-6">
+              <li key={item.organization} className="grid gap-2 px-5 py-5 transition-colors hover:bg-mist/40 lg:grid-cols-[minmax(0,4fr)_minmax(0,3fr)_minmax(0,5fr)] lg:gap-6">
                 <p className="font-heading text-base font-bold text-navy">{item.organization}</p>
-                <p className="text-[0.9375rem] font-medium text-brand-ink">
+                <p className="text-[0.9rem] font-semibold text-brand-ink">
                   <span className="font-semibold text-navy lg:sr-only">Sektor: </span>
                   {item.sector}
                 </p>
@@ -89,15 +89,15 @@ export default function PortofolioPage() {
         <p className="mt-5 max-w-[82ch] text-[13px] leading-relaxed text-muted-foreground">{experienceDisclaimer}</p>
       </Section>
 
-      {/* From experience to transformation + Our approach */}
+      {/* From experience to transformation + 4 Approach Bento Cards */}
       <Section tone="mist" id="pendekatan">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-          <div className="lg:sticky lg:top-36 lg:self-start">
+          <div className="lg:sticky lg:top-32 lg:self-start">
             <SectionHeading
               title="Dari pengalaman menuju transformasi"
               lead="Pengalaman di lapangan menjadi fondasi Smart Records Center dalam merancang solusi yang memperhatikan keamanan, tata kelola, manusia, proses, kepatuhan, retensi, penyusutan, preservasi, dan nilai bisnis."
             />
-            <blockquote className="mt-8 border-t-2 border-navy pt-6 font-heading text-xl leading-snug font-bold text-navy">
+            <blockquote className="mt-8 rounded-xl border border-navy/15 bg-navy p-6 font-heading text-lg leading-snug font-bold text-white shadow-card">
               &ldquo;Digitalisasi dokumen tanpa tata kelola yang baik hanya akan memindahkan masalah dari lemari arsip ke server.&rdquo;
             </blockquote>
             <ul className="mt-6 flex flex-col gap-3">
@@ -115,12 +115,15 @@ export default function PortofolioPage() {
             <p className="lead mt-4 text-body">
               Empat prinsip kerja yang menyatukan kebijakan kearsipan, kepatuhan regulasi, dan teknologi dalam satu jalur pengelolaan informasi menyeluruh.
             </p>
-            <div className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2">
-              {approachPillars.map((pillar) => (
-                <div key={pillar.title} className="border-t-2 border-navy pt-5">
-                  <h4 className="font-heading text-lg font-bold text-navy">{pillar.title}</h4>
-                  <p className="mt-0.5 text-[13px] font-semibold text-brand-ink">{pillar.subtitle}</p>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-body">{pillar.text}</p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              {approachPillars.map((pillar, i) => (
+                <div key={pillar.title} className="rounded-xl border border-border bg-white p-6 shadow-card">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="code text-xs font-semibold text-brand">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="rounded-md bg-brand-wash px-2 py-0.5 text-[11.5px] font-semibold text-brand-ink">{pillar.subtitle}</span>
+                  </div>
+                  <h4 className="mt-3 font-heading text-lg font-bold text-navy">{pillar.title}</h4>
+                  <p className="mt-2 text-[0.9rem] leading-relaxed text-body">{pillar.text}</p>
                 </div>
               ))}
             </div>
@@ -146,23 +149,23 @@ export default function PortofolioPage() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-8">
-            <ul className="divide-y divide-border border-y border-border">
+          <div className="flex flex-col justify-between gap-6">
+            <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-white shadow-card">
               {commitmentPoints.map((point) => (
-                <li key={point} className="flex gap-3 py-4 text-[0.9375rem] leading-relaxed">
+                <li key={point} className="flex gap-3 px-5 py-4 text-[0.9375rem] leading-relaxed">
                   <CheckIcon className="mt-1 size-4 shrink-0 text-brand" aria-hidden />
                   {point}
                 </li>
               ))}
             </ul>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-border bg-mist p-5">
-                <p className="font-heading text-lg font-bold text-navy">Dari dokumen menuju informasi tepercaya</p>
-                <p className="mt-1 text-[13px] text-muted-foreground">From Documents to Trusted Information</p>
+              <div className="rounded-xl border border-brand/20 bg-brand-wash/70 p-5">
+                <p className="font-heading text-base font-bold text-navy">Dari dokumen menuju informasi tepercaya</p>
+                <p className="mt-1 text-xs font-medium text-brand-ink">From Documents to Trusted Information</p>
               </div>
-              <div className="rounded-xl border border-border bg-mist p-5">
-                <p className="font-heading text-lg font-bold text-navy">Dari manajemen rekod menuju tata kelola informasi</p>
-                <p className="mt-1 text-[13px] text-muted-foreground">From Records Management to Information Governance</p>
+              <div className="rounded-xl border border-brand/20 bg-brand-wash/70 p-5">
+                <p className="font-heading text-base font-bold text-navy">Dari manajemen rekod menuju tata kelola informasi</p>
+                <p className="mt-1 text-xs font-medium text-brand-ink">From Records Management to Information Governance</p>
               </div>
             </div>
           </div>

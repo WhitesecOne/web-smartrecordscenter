@@ -2,12 +2,13 @@ import { CheckIcon, FileTextIcon, KeyRoundIcon, LockIcon, SearchIcon, ShieldAler
 
 import { DashboardMock } from "@/components/product/dashboard"
 import { ExtractionMock } from "@/components/product/extraction"
+import { InteractiveBcsMock, InteractiveRecordsMock, InteractiveSearchMock, InteractiveTriageMock } from "@/components/product/interactive-mocks"
 import { RegisterVerifier } from "@/components/product/register"
 import { Code, Confidence, MockFrame, MockPanel, MockTable, SampleTag, StatusBadge } from "@/components/product/ui"
 import { Badge } from "@/components/ui/badge"
 import { sha256Hex } from "@/lib/chain"
 import type { MockKey } from "@/lib/modules"
-import { sampleClasses, sampleRecords, securityLabel } from "@/lib/sample"
+import { sampleClasses, sampleRecords } from "@/lib/sample"
 import { cn } from "@/lib/utils"
 
 // Controls inside a product picture are part of the picture, so they are spans, never live buttons.
@@ -60,34 +61,6 @@ function TenantsMock() {
       <p className="border-t border-border bg-mist/60 px-4 py-2.5 text-[12.5px] text-muted-foreground">
         Setiap kueri dibatasi oleh <span className="code text-navy">tenant_id</span> milik pengguna sebelum menyentuh data.
       </p>
-    </MockFrame>
-  )
-}
-
-export function RecordsMock() {
-  const filters = ["Semua", "Aktif", "Inaktif", "Permanen", "Menunggu penyusutan"]
-  return (
-    <MockFrame title="Repositori Arsip · Daftar Arsip">
-      <div className="flex flex-wrap gap-1.5 border-b border-border px-4 py-2.5 text-xs font-semibold">
-        {filters.map((f, i) => (
-          <span key={f} className={cn("rounded-md px-2.5 py-1.5", i === 0 ? "bg-navy text-white" : "text-body")}>{f}</span>
-        ))}
-      </div>
-      <MockTable
-        minWidth="40rem"
-        rows={sampleRecords.slice(0, 7)}
-        cols={[
-          { label: "Nomor", cell: (r) => <Code>{r.no}</Code> },
-          { label: "Judul", cell: (r) => <span className="font-medium text-navy">{r.title}</span> },
-          { label: "Keamanan", cell: (r) => securityLabel[r.security] },
-          { label: "Status", cell: (r) => (
-            <span className="inline-flex items-center gap-1.5">
-              <StatusBadge status={r.status} />
-              {r.hold && <Badge variant="outline">Legal hold</Badge>}
-            </span>
-          ) },
-        ]}
-      />
     </MockFrame>
   )
 }
@@ -180,40 +153,6 @@ function DuplicateMock() {
 }
 
 /* Pencarian & Temu Kembali */
-
-function SearchMock() {
-  const hits = [
-    { title: "Kontrak Pemeliharaan Gedung 2019-2021", no: "HKM-2021-000014", text: ["… ruang lingkup ", "pemeliharaan gedung", " kantor pusat meliputi sistem kelistrikan …"] },
-    { title: "Addendum Perpanjangan Kontrak Pemeliharaan", no: "HKM-2021-000015", text: ["… jangka waktu ", "pemeliharaan gedung", " diperpanjang sampai 31 Desember 2021 …"] },
-  ]
-  return (
-    <MockFrame title="Pencarian & Temu Kembali · Hasil Pencarian">
-      <div className="p-4 text-[13px]">
-        <div className="flex h-10 items-center gap-2 rounded-md border border-brand px-3 text-navy ring-3 ring-brand/15">
-          <SearchIcon className="size-4 text-brand" aria-hidden />
-          &quot;pemeliharaan gedung&quot; kode:HK.02.*
-        </div>
-        <p className="mt-2 text-xs text-muted-foreground">2 hasil · teks lengkap · 1 hasil disembunyikan sesuai hak akses</p>
-        <ul className="mt-3 flex flex-col gap-2">
-          {hits.map((h) => (
-            <li key={h.no} className="rounded-md border border-border p-3">
-              <p className="flex items-center gap-2 font-semibold text-navy">
-                <FileTextIcon className="size-4 text-muted-foreground" aria-hidden />
-                {h.title}
-              </p>
-              <p className="mt-1 text-body">
-                {h.text[0]}
-                <mark className="rounded-[3px] bg-brand-wash px-0.5 text-brand-ink">{h.text[1]}</mark>
-                {h.text[2]}
-              </p>
-              <p className="code mt-1 text-[11.5px] text-muted-foreground">{h.no} · halaman 2</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </MockFrame>
-  )
-}
 
 function FacetsMock() {
   const facets: [string, [string, number, boolean?][]][] = [
@@ -338,52 +277,6 @@ function AccessMock() {
 
 /* Verifikasi & Pemilahan Arsip */
 
-function TriageMock() {
-  const rows = [
-    { doc: "SK Direksi No. 14/2026 tentang SOTK.pdf", kind: "Arsip", why: "Keputusan resmi · bernilai guna", conf: 0.98, status: "arsip" as const },
-    { doc: "Kontrak Sewa Gedung 2026-2028.pdf", kind: "Arsip", why: "Perjanjian hukum · retensi 10 th", conf: 0.96, status: "arsip" as const },
-    { doc: "Notifikasi Pemeliharaan Sistem.eml", kind: "Non-arsip", why: "Pemberitahuan otomatis sistem", conf: 0.95, status: "non" as const },
-    { doc: "Draf Lampiran Rapat (Sementara).docx", kind: "Perlu review", why: "Belum final · cek status penetapan", conf: 0.74, status: "review" as const },
-    { doc: "Bukti Transfer Vendor Termin 2.pdf", kind: "Arsip", why: "Transaksi keuangan · wajib retensi", conf: 0.94, status: "arsip" as const },
-  ]
-  return (
-    <MockFrame title="Verifikasi & Pemilahan Arsip · Antrean Pemilahan">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-2.5 text-xs">
-        <span className="inline-flex items-center gap-2 text-muted-foreground">
-          <AiTag>Pemilahan AI</AiTag>
-          <span>5 dokumen masuk · 3 arsip · 1 non-arsip · 1 perlu review</span>
-        </span>
-      </div>
-      <MockTable
-        minWidth="42rem"
-        rows={rows}
-        cols={[
-          { label: "Dokumen", cell: (r) => (
-            <span className="flex flex-col">
-              <span className="font-medium text-navy">{r.doc}</span>
-              <span className="text-[11.5px] text-muted-foreground">{r.why}</span>
-            </span>
-          ) },
-          { label: "Usulan", cell: (r) => (
-            r.status === "arsip" ? <Badge variant="active">{r.kind}</Badge> :
-            r.status === "non" ? <Badge variant="inactive">{r.kind}</Badge> :
-            <Badge variant="review">{r.kind}</Badge>
-          ) },
-          { label: "Keyakinan", cell: (r) => <Confidence value={r.conf} /> },
-          { label: "Tindakan", cell: (r) => (
-            r.status === "arsip" ? <Fake primary>Teruskan ke klasifikasi</Fake> :
-            r.status === "non" ? <Fake>Karantina</Fake> :
-            <Badge variant="review">Tinjau</Badge>
-          ) },
-        ]}
-      />
-      <p className="border-t border-border bg-mist/60 px-4 py-2.5 text-[12.5px] text-muted-foreground">
-        Dokumen non-arsip dipisahkan ke area karantina sehingga repositori tetap bersih dan jadwal retensi lebih akurat.
-      </p>
-    </MockFrame>
-  )
-}
-
 function MetadataMock() {
   const rows = [
     { el: "Judul", dc: "dc:title", req: true, val: "Laporan Keuangan Tahunan 2025" },
@@ -474,39 +367,6 @@ function HistoryMock() {
 }
 
 /* Klasifikasi Arsip */
-
-function BcsMock() {
-  const tree = [
-    { code: "KU", name: "Keuangan", depth: 0 },
-    { code: "KU.01", name: "Pelaporan keuangan", depth: 1 },
-    { code: "KU.01.02", name: "Laporan keuangan tahunan", depth: 2, on: true },
-    { code: "KU.02", name: "Pembayaran", depth: 1 },
-    { code: "KU.02.01", name: "Bukti pembayaran", depth: 2 },
-    { code: "HK", name: "Hukum", depth: 0 },
-    { code: "HK.02.01", name: "Kontrak dan perjanjian", depth: 2 },
-  ]
-  return (
-    <MockFrame title="Klasifikasi Arsip · Skema Klasifikasi">
-      <div className="grid text-[13px] sm:grid-cols-[minmax(0,1fr)_14rem]">
-        <ul className="border-b border-border p-3 sm:border-r sm:border-b-0">
-          {tree.map((t) => (
-            <li key={t.code} className={cn("flex items-center gap-2 rounded-md py-1.5 pr-2", t.on && "bg-brand-wash")} style={{ paddingLeft: `${0.5 + t.depth * 1.1}rem` }}>
-              <Code>{t.code}</Code>
-              <span className={cn("truncate", t.depth === 0 ? "font-semibold text-navy" : "text-body")}>{t.name}</span>
-            </li>
-          ))}
-        </ul>
-        <dl className="grid grid-cols-2 gap-x-3 gap-y-2 p-4 text-[12.5px] sm:grid-cols-1">
-          <div><dt className="text-muted-foreground">Kode</dt><dd><Code>KU.01.02</Code></dd></div>
-          <div><dt className="text-muted-foreground">Retensi aktif</dt><dd className="font-semibold text-navy">2 tahun</dd></div>
-          <div><dt className="text-muted-foreground">Retensi inaktif</dt><dd className="font-semibold text-navy">8 tahun</dd></div>
-          <div><dt className="text-muted-foreground">Nasib akhir</dt><dd><Badge variant="permanent">Permanen</Badge></dd></div>
-          <div><dt className="text-muted-foreground">Arsip terkait</dt><dd className="font-semibold text-navy">128</dd></div>
-        </dl>
-      </div>
-    </MockFrame>
-  )
-}
 
 function VersionsMock() {
   const rows = [
@@ -868,13 +728,13 @@ function SummaryMock() {
 }
 
 const registry: Record<MockKey, () => React.ReactNode | Promise<React.ReactNode>> = {
-  triage: TriageMock,
+  triage: () => <InteractiveTriageMock />,
   tenants: TenantsMock,
-  records: RecordsMock,
+  records: () => <InteractiveRecordsMock />,
   lifecycle: LifecycleMock,
   fixity: FixityMock,
   duplicate: DuplicateMock,
-  search: SearchMock,
+  search: () => <InteractiveSearchMock />,
   facets: FacetsMock,
   semantic: SemanticMock,
   access: AccessMock,
@@ -882,7 +742,7 @@ const registry: Record<MockKey, () => React.ReactNode | Promise<React.ReactNode>
   validation: ValidationMock,
   history: HistoryMock,
   extraction: () => <ExtractionMock />,
-  bcs: BcsMock,
+  bcs: () => <InteractiveBcsMock />,
   versions: VersionsMock,
   classify: ClassifyMock,
   retention: RetentionMock,

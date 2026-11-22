@@ -12,13 +12,13 @@ import { CopyEmail } from "./copy-email"
 export const metadata: Metadata = {
   title: "Minta Demo",
   description:
-    "Minta demo Smart Records Center lewat email. Kami tunjukkan repositori, pencarian, metadata, klasifikasi, retensi dan penyusutan, jejak audit, serta pelaporan memakai skenario arsip organisasi Anda.",
+    "Minta demo Smart Records Center lewat email. Kami tunjukkan verifikasi dan pemilahan arsip, klasifikasi, repositori, pencarian, retensi dan penyusutan, jejak audit, serta pelaporan (dashboard) memakai skenario arsip organisasi Anda.",
   alternates: { canonical: "/kontak" },
   openGraph: { ...ogBase, url: "/kontak", title: "Minta demo Smart Records Center" },
 }
 
 const agenda = [
-  "Alur satu seri arsip Anda: diterima, dilengkapi metadatanya, diklasifikasikan, dan diberi jadwal retensi sesuai JRA.",
+  "Alur satu seri arsip Anda: dipilah dari non-arsip, diverifikasi kelengkapan metadatanya, diklasifikasikan, dan diberi jadwal retensi sesuai JRA.",
   "Pencarian teks lengkap dan metadata, serta usulan AI beserta skor dan sumbernya.",
   "Jejak audit berantai hash dan cara auditor memverifikasinya secara mandiri.",
   "Dasbor kepatuhan dan contoh laporan untuk pimpinan dan regulator.",
@@ -55,19 +55,21 @@ export default function KontakPage() {
           <div className="flex flex-col gap-10">
             <div>
               <h2 className="text-2xl font-bold tracking-[-0.02em]">Yang kita bahas dalam demo</h2>
-              <ul className="mt-5 flex flex-col gap-3.5">
-                {agenda.map((item) => (
-                  <li key={item} className="flex gap-3 leading-relaxed">
-                    <CheckIcon className="mt-1 size-4 shrink-0 text-brand" aria-hidden />
-                    {item}
+              <ol className="mt-6 flex flex-col gap-3">
+                {agenda.map((item, i) => (
+                  <li key={item} className="flex gap-3.5 rounded-xl border border-border bg-white p-4 leading-relaxed shadow-card">
+                    <span className="code flex size-7 shrink-0 items-center justify-center rounded-md bg-brand-wash text-xs font-semibold text-brand-ink">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[0.9375rem]">{item}</span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </div>
 
           <div className="flex flex-col gap-8">
-            <div className="rounded-xl border border-border bg-white p-5 sm:p-8">
+            <div className="rounded-xl border border-border bg-white p-6 shadow-card sm:p-8">
               <h2 className="text-xl font-bold tracking-[-0.02em]">Cara menghubungi kami</h2>
               <p className="mt-3 leading-relaxed">
                 Tulis email ke{" "}

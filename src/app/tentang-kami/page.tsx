@@ -94,11 +94,12 @@ export default function TentangKamiPage() {
       <Section tone="mist">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
           <SectionHeading title="Prinsip kami" lead="Empat prinsip ini menentukan cara kami merancang produk dan cara kami berbicara tentangnya." />
-          <ul className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
-            {principles.map((p) => (
-              <li key={p.title} className="border-t-2 border-navy pt-5">
-                <h3 className="text-lg font-bold">{p.title}</h3>
-                <p className="mt-2 text-[0.9375rem] leading-relaxed">{p.text}</p>
+          <ul className="grid gap-5 sm:grid-cols-2">
+            {principles.map((p, i) => (
+              <li key={p.title} className="rounded-xl border border-border bg-white p-6 shadow-card">
+                <span className="code text-xs font-semibold text-brand">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-2 text-lg font-bold">{p.title}</h3>
+                <p className="mt-2 text-[0.9rem] leading-relaxed">{p.text}</p>
               </li>
             ))}
           </ul>

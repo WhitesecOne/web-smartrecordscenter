@@ -42,7 +42,7 @@ export function RegisterVerifierClient({ entries }: { entries: ChainedEntry[] })
             : "Tekan Verifikasi. Browser Anda menghitung ulang SHA-256 setiap entri dan mencocokkannya dengan hash yang tersimpan."
 
   return (
-    <MockFrame title="Jejak Audit · Log Audit Berantai Hash">
+    <MockFrame title="Jejak Audit · Log Audit Berantai Hash" interactive>
       <ol className="divide-y divide-border sm:hidden">
         {list.map((e) => {
           const broken = result.state === "broken" && result.seq === e.seq

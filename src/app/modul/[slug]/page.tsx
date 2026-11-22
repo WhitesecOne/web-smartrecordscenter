@@ -59,7 +59,7 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
       <JsonLd data={pageGraph("WebPage", `/modul/${m.slug}`, `Modul ${m.name}`, m.metaDescription, { "@type": "Thing", name: m.name, description: m.short })} />
       <PageHero crumbs={[{ href: "/modul", label: "Modul" }, { label: m.name }]} title={m.title} lead={m.lead} tone="navy" visual={<ProductMock k={m.heroMock} />} />
 
-      <nav aria-label={`Bagian modul ${m.name}`} className="sticky top-16 z-20 border-b border-border bg-white/95 lg:top-[6.75rem]">
+      <nav aria-label={`Bagian modul ${m.name}`} className="sticky top-16 z-20 border-b border-border bg-white/92 backdrop-blur-md lg:top-[6.75rem]">
         <div className="container-page">
           <ul className="-mx-1 flex gap-1 overflow-x-auto py-2 text-sm font-semibold whitespace-nowrap">
             {[{ id: "ringkasan", name: "Ringkasan" }, ...m.features, { id: "aturan", name: "Aturan & bukti" }].map((f) => (

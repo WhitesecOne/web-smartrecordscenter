@@ -55,19 +55,23 @@ export default function PlatformPage() {
 
       <Section tone="mist">
         <SectionHeading title="Perjalanan satu arsip melalui platform" lead="Urutan ini berlaku untuk setiap arsip, dari hari pertama sampai nasib akhirnya." />
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {flow.map((s, i) => {
             const m = moduleBySlug(s.slug)!
             return (
-              <li key={s.name} className="flex flex-col bg-white p-6">
+              <li key={s.name} className="flex flex-col rounded-xl border border-border bg-white p-6 shadow-card transition-all hover:border-brand/35 hover:shadow-product">
                 <span className="flex items-center justify-between gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">{i + 1}</span>
-                  <m.icon className="size-5 text-brand" aria-hidden />
+                  <span className="code flex size-8 items-center justify-center rounded-md bg-navy text-xs font-bold text-white">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="flex size-9 items-center justify-center rounded-md bg-brand-wash text-brand">
+                    <m.icon className="size-4.5" aria-hidden />
+                  </span>
                 </span>
                 <h3 className="mt-4 text-lg font-bold">{s.name}</h3>
-                <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed">{s.text}</p>
-                <Link href={`/modul/${m.slug}`} className="link-action mt-4 text-sm">
-                  Modul {m.name}
+                <p className="mt-2 flex-1 text-[0.9rem] leading-relaxed">{s.text}</p>
+                <Link href={`/modul/${m.slug}`} className="link-action mt-5 border-t border-border pt-3.5 text-sm">
+                  Modul {m.name} <ArrowRightIcon className="size-3.5" aria-hidden />
                 </Link>
               </li>
             )

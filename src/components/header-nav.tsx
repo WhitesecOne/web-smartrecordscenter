@@ -25,18 +25,16 @@ import { cn } from "@/lib/utils"
 /** Slim module entry; the icon arrives already rendered so the client bundle never carries module copy. */
 export type NavModule = { href: string; name: string; short: string; icon: React.ReactNode }
 
-// Active section: brand text plus a 2px rule on the bar's bottom edge, the way a tabbed corporate header marks "you are here".
 const trigger = cn(
   navigationMenuTriggerStyle(),
   "relative h-[4.5rem] rounded-none bg-transparent px-3 text-[0.9375rem] font-semibold text-navy hover:bg-transparent hover:text-brand focus:bg-transparent data-popup-open:bg-transparent data-popup-open:text-brand data-open:bg-transparent",
-  "after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-brand after:opacity-0 after:transition-opacity data-[active=true]:text-brand data-[active=true]:after:opacity-100"
+  "after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-brand after:opacity-0 after:transition-opacity data-[active=true]:text-brand data-[active=true]:after:opacity-100",
 )
 
 export function HeaderNav({ modules }: { modules: NavModule[] }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  // Every panel opens in the same place, centred under the header row, instead of jumping to its trigger.
   const barRef = useRef<HTMLDivElement>(null)
   const is = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
   const inCompany = companyNav.some((l) => is(l.href))
@@ -49,25 +47,42 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
   }, [])
 
   return (
-    <header className={cn("sticky top-0 z-40 bg-white transition-shadow", scrolled && "shadow-[0_6px_20px_-12px_rgb(11_36_71/0.3)]")}>
-      <a href="#konten" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-navy focus:px-3 focus:py-2 focus:text-white">
+    <header
+      className={cn(
+        "sticky top-0 z-40 bg-white/92 backdrop-blur-md transition-shadow",
+        scrolled && "shadow-[0_8px_24px_-14px_rgb(8_27_54/0.25)]",
+      )}
+    >
+      <a
+        href="#konten"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-navy focus:px-3 focus:py-2 focus:text-white"
+      >
         Lompat ke konten
       </a>
-      <div className="hidden bg-navy text-[13px] text-white/75 md:block">
+
+      {/* Architectural top utility bar */}
+      <div className="hidden bg-navy text-[12.5px] text-white/75 md:block">
         <div className="container-page flex h-9 items-center justify-between">
-          <p>Platform tata kelola arsip digital untuk organisasi teregulasi di Indonesia</p>
+          <p className="flex items-center gap-2">
+            <span aria-hidden className="size-1.5 rounded-[2px] bg-brand-soft" />
+            Platform tata kelola arsip digital untuk organisasi teregulasi di Indonesia
+          </p>
           <nav aria-label="Tautan cepat" className="flex items-center gap-6">
-            <Link href="/platform/keamanan" className="hover:text-white hover:underline">
+            <Link href="/portofolio" className="transition-colors hover:text-white hover:underline">
+              Portofolio
+            </Link>
+            <Link href="/platform/keamanan" className="transition-colors hover:text-white hover:underline">
               Keamanan &amp; Kepatuhan
             </Link>
-            <Link href="/kontak#kontak-langsung" className="hover:text-white hover:underline">
+            <Link href="/kontak#kontak-langsung" className="transition-colors hover:text-white hover:underline">
               Hubungi kami
             </Link>
           </nav>
         </div>
       </div>
 
-      <div className="border-b border-border">
+      {/* Main precision navigation bar */}
+      <div className="border-b border-border/90">
         <div ref={barRef} className="container-page flex h-16 items-center justify-between gap-6 lg:h-[4.5rem]">
           <Link href="/" className="flex min-h-11 items-center" aria-label="Smart Records Center, beranda">
             <Logo />
@@ -81,7 +96,13 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="p-0">
                   <Panel
-                    items={[...modules.map((m) => ({ href: m.href, label: m.name, desc: m.short, lead: <IconTile>{m.icon}</IconTile> }))]}
+                    items={modules.map((m, idx) => ({
+                      href: m.href,
+                      label: m.name,
+                      desc: m.short,
+                      badge: String(idx + 1).padStart(2, "0"),
+                      lead: <IconTile>{m.icon}</IconTile>,
+                    }))}
                     footer={{ href: "/modul", label: "Bandingkan ketujuh modul" }}
                     side={
                       <Feature
@@ -104,13 +125,27 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
                   <Panel
                     items={platformNav.map((l) => ({ href: l.href, label: l.label, desc: l.desc ?? "" }))}
                     side={
-                      <Feature title="Periksa jejak audit sendiri" text="Ubah satu entri log contoh, lalu lihat rantai hash putus tepat di entri itu." href="/platform/keamanan#coba-verifikasi" cta="Coba verifikasi">
+                      <Feature
+                        title="Periksa jejak audit sendiri"
+                        text="Ubah satu entri log contoh, lalu lihat rantai hash putus tepat di entri itu."
+                        href="/platform/keamanan#coba-verifikasi"
+                        cta="Coba verifikasi"
+                      >
                         <ol className="code flex flex-col gap-1 rounded-md border border-border bg-white p-2.5 text-[11px] text-muted-foreground">
-                          <li className="flex justify-between gap-2"><span className="text-navy">8 hold.dipasang</span><span>a7bf02…</span></li>
-                          <li className="flex justify-between gap-2"><span className="text-navy">9 penyusutan.usulan</span><span>dcf840…</span></li>
-                          <li className="flex justify-between gap-2"><span className="text-navy">10 bukti.ekspor</span><span>1e0192…</span></li>
-                          <li className="mt-1 flex items-center gap-1 border-t border-border pt-1.5 font-sans font-semibold text-brand-ink">
-                            <CheckIcon className="size-3" aria-hidden /> Rantai utuh
+                          <li className="flex justify-between gap-2">
+                            <span className="text-navy">8 hold.dipasang</span>
+                            <span>a7bf02…</span>
+                          </li>
+                          <li className="flex justify-between gap-2">
+                            <span className="text-navy">9 penyusutan.usulan</span>
+                            <span>dcf840…</span>
+                          </li>
+                          <li className="flex justify-between gap-2">
+                            <span className="text-navy">10 bukti.ekspor</span>
+                            <span>1e0192…</span>
+                          </li>
+                          <li className="mt-1 flex items-center gap-1 border-t border-border pt-1.5 font-sans font-semibold text-teal-ink">
+                            <CheckIcon className="size-3" aria-hidden /> Rantai SHA-256 utuh
                           </li>
                         </ol>
                       </Feature>
@@ -130,7 +165,7 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
                       label: s.label,
                       desc: s.desc ?? "",
                       lead: (
-                        <span className="relative block size-14 shrink-0 overflow-hidden rounded-md bg-mist">
+                        <span className="relative block size-14 shrink-0 overflow-hidden rounded-md bg-mist ring-1 ring-border">
                           <Image src={s.photo.src} alt="" fill sizes="56px" className="object-cover" />
                         </span>
                       ),
@@ -164,8 +199,9 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
           </NavigationMenu>
 
           <div className="flex items-center gap-2">
-            <Button render={<Link href="/kontak" />} nativeButton={false} className="hidden sm:inline-flex">
+            <Button render={<Link href="/kontak" />} nativeButton={false} className="hidden gap-1.5 sm:inline-flex">
               Minta Demo
+              <ArrowRightIcon className="size-3.5 transition-transform group-hover/button:translate-x-0.5" aria-hidden />
             </Button>
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger render={<Button variant="outline" size="icon" className="lg:hidden" aria-label="Buka menu" />}>
@@ -208,7 +244,7 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
 
 function IconTile({ children }: { children: React.ReactNode }) {
   return (
-    <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-mist text-navy transition-colors group-hover/item:bg-brand-wash group-hover/item:text-brand [&_svg]:size-5">
+    <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/80 bg-mist text-navy transition-colors group-hover/item:border-brand/25 group-hover/item:bg-brand-wash group-hover/item:text-brand [&_svg]:size-5">
       {children}
     </span>
   )
@@ -234,24 +270,26 @@ function MobileGroup({ title, links }: { title: string; links: { href: string; l
   )
 }
 
-type PanelItem = { href: string; label: string; desc: string; lead?: React.ReactNode }
+type PanelItem = { href: string; label: string; desc: string; lead?: React.ReactNode; badge?: string }
 
-/** One skeleton for every header menu: a two-column list of destinations, an optional footer link, and an optional side card. */
 function Panel({ items, side, footer, narrow }: { items: PanelItem[]; side?: React.ReactNode; footer?: { href: string; label: string }; narrow?: boolean }) {
   return (
-    <div className={cn("grid max-w-[calc(100vw-2rem)] gap-2 p-2", narrow ? "w-[36rem]" : side ? "w-[60rem] grid-cols-[minmax(0,1fr)_17rem]" : "w-[52rem]")}>
+    <div className={cn("grid max-w-[calc(100vw-2rem)] gap-2 p-2", narrow ? "w-[36rem]" : side ? "w-[62rem] grid-cols-[minmax(0,1fr)_17.5rem]" : "w-[52rem]")}>
       <div className="flex flex-col">
         <ul className="grid grid-cols-2 content-start gap-1">
           {items.map((i) => (
             <li key={i.href}>
               <NavigationMenuLink
                 render={<Link href={i.href} />}
-                className="group/item h-full flex-row items-start justify-start gap-3 rounded-lg p-3 hover:bg-mist focus:bg-mist data-active:bg-transparent"
+                className="group/item h-full flex-row items-start justify-start gap-3 rounded-lg p-3 transition-colors hover:bg-mist focus:bg-mist data-active:bg-transparent"
               >
                 {i.lead}
                 <span className="flex min-w-0 flex-col gap-1">
-                  <span className="text-[0.9375rem] font-semibold text-navy group-hover/item:text-brand">{i.label}</span>
-                  <span className="text-[13px] leading-snug text-muted-foreground">{i.desc}</span>
+                  <span className="flex items-center gap-2 text-[0.9375rem] font-semibold text-navy group-hover/item:text-brand">
+                    {i.badge && <span className="code text-[11px] font-medium text-muted-foreground">{i.badge}</span>}
+                    {i.label}
+                  </span>
+                  <span className="text-[12.5px] leading-snug text-muted-foreground">{i.desc}</span>
                 </span>
               </NavigationMenuLink>
             </li>
@@ -267,7 +305,7 @@ function Panel({ items, side, footer, narrow }: { items: PanelItem[]; side?: Rea
           </NavigationMenuLink>
         )}
       </div>
-      {side && <div className="flex flex-col overflow-hidden rounded-lg bg-mist">{side}</div>}
+      {side && <div className="flex flex-col overflow-hidden rounded-lg border border-border/80 bg-mist">{side}</div>}
     </div>
   )
 }
@@ -291,7 +329,7 @@ function Feature({
     <>
       {photo && (
         <span className="relative block h-32 shrink-0">
-          <Image src={photo.src} alt={photo.alt} fill sizes="272px" className="object-cover" />
+          <Image src={photo.src} alt={photo.alt} fill sizes="280px" className="object-cover" />
         </span>
       )}
       <div className="flex flex-1 flex-col p-4">

@@ -27,7 +27,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* Brand: navy owns whole regions and every heading, blue is the single action colour. */
+  /* Precision Governance palette: deep archive navy, crisp daylight surfaces, single cobalt action blue. */
   --color-navy: var(--navy);
   --color-navy-2: var(--navy-2);
   --color-brand: var(--brand);
@@ -36,7 +36,7 @@
   --color-brand-soft: var(--brand-soft);
   --color-mist: var(--mist);
   --color-body: var(--body);
-  /* Record status colours, used only inside product UI. */
+  /* Record status colours, quarantined inside product UI. */
   --color-teal: var(--teal);
   --color-teal-ink: var(--teal-ink);
   --color-teal-wash: var(--teal-wash);
@@ -55,20 +55,20 @@
   --radius-4xl: 24px;
 }
 
-/* Light only, by the owner's decision: the site is read at a desk, in office daylight. */
+/* Precision Governance (Daylight Edition): ultra-clean enterprise surfaces with architectural hairline grids. */
 :root {
-  --navy: #0b2447;
-  --navy-2: #133a6b;
+  --navy: #081b36;
+  --navy-2: #112d56;
   --brand: #1d4ed8;
   --brand-ink: #1e40af;
-  --brand-wash: #eaf0fd;
+  --brand-wash: #eef4ff;
   /* Links and icons that sit on navy fields. */
-  --brand-soft: #9bb8ff;
-  --teal: #0e7c7b;
-  --teal-ink: #0a6463;
-  --teal-wash: #e7f3f2;
-  --mist: #f4f6fa;
-  --body: #3b4a5e;
+  --brand-soft: #93c5fd;
+  --teal: #0d7a77;
+  --teal-ink: #0a5f5d;
+  --teal-wash: #e6f5f4;
+  --mist: #f6f8fc;
+  --body: #3d4d63;
 
   --background: #ffffff;
   --foreground: var(--navy);
@@ -78,10 +78,10 @@
   --popover-foreground: var(--navy);
   --primary: var(--brand);
   --primary-foreground: #ffffff;
-  --secondary: #eef2f7;
+  --secondary: #edf1f7;
   --secondary-foreground: var(--navy);
   --muted: var(--mist);
-  --muted-foreground: #526179;
+  --muted-foreground: #55657d;
   --accent: var(--brand-wash);
   --accent-foreground: var(--navy);
   --destructive: #b42318;
@@ -153,52 +153,82 @@
   .display {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.028em;
-    line-height: 1.06;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
   }
   .h2 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.022em;
-    line-height: 1.14;
+    letter-spacing: -0.024em;
+    line-height: 1.13;
     font-size: clamp(1.875rem, 3vw, 2.5rem);
   }
   .h3 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.015em;
-    line-height: 1.25;
+    letter-spacing: -0.016em;
+    line-height: 1.24;
     font-size: 1.375rem;
   }
   .lead {
     font-size: 1.125rem;
-    line-height: 1.7;
+    line-height: 1.68;
   }
   .code {
     font-family: var(--font-mono-face);
     letter-spacing: -0.01em;
   }
-  /* Text link in the action colour; the arrow only appears on links that move the reader to another page. */
   .link-action {
-    @apply inline-flex items-center gap-1.5 font-semibold text-brand hover:text-brand-ink hover:underline;
+    @apply inline-flex items-center gap-1.5 font-semibold text-brand transition-colors hover:text-brand-ink hover:underline;
   }
-  /* Soft layered elevation, reserved for product frames, floating panels and menus. */
+  /* Precision architectural surfaces (Stripe x Vanta register). */
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(8 27 54 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(8 27 54 / 0.045) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  .bg-grid-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.055) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  .bg-dots-light {
+    background-image: radial-gradient(rgb(8 27 54 / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .hero-glow-light {
+    background:
+      radial-gradient(62% 52% at 84% 12%, rgb(29 78 216 / 0.085) 0%, rgb(29 78 216 / 0) 70%),
+      radial-gradient(48% 44% at 14% 8%, rgb(14 122 119 / 0.05) 0%, rgb(14 122 119 / 0) 68%);
+  }
+  .hero-glow-dark {
+    background:
+      radial-gradient(58% 60% at 86% 10%, rgb(59 130 246 / 0.22) 0%, rgb(59 130 246 / 0) 70%),
+      radial-gradient(45% 50% at 10% 95%, rgb(13 122 119 / 0.16) 0%, rgb(13 122 119 / 0) 70%);
+  }
+  /* Soft layered navy elevation for product frames, floating panels and hovered bento cards. */
   .shadow-product {
     box-shadow:
-      0 1px 2px rgb(11 36 71 / 0.06),
-      0 12px 24px -8px rgb(11 36 71 / 0.12),
-      0 32px 64px -24px rgb(11 36 71 / 0.22);
+      0 1px 2px rgb(8 27 54 / 0.05),
+      0 12px 28px -8px rgb(8 27 54 / 0.11),
+      0 32px 64px -24px rgb(8 27 54 / 0.19);
   }
-  /* Navy veil over photographs: dense where text sits, thinning toward the open side. */
+  .shadow-card {
+    box-shadow:
+      0 1px 2px rgb(8 27 54 / 0.04),
+      0 4px 12px -4px rgb(8 27 54 / 0.06);
+  }
+  /* Navy veil over photographs: authoritative where text sits, clear toward the architectural subject. */
   .veil-left {
     background:
-      linear-gradient(90deg, rgb(11 36 71 / 0.95) 0%, rgb(11 36 71 / 0.88) 38%, rgb(11 36 71 / 0.45) 68%, rgb(11 36 71 / 0.2) 100%),
-      linear-gradient(0deg, rgb(11 36 71 / 0.55) 0%, rgb(11 36 71 / 0) 40%);
+      linear-gradient(90deg, rgb(8 27 54 / 0.96) 0%, rgb(8 27 54 / 0.89) 40%, rgb(8 27 54 / 0.48) 70%, rgb(8 27 54 / 0.24) 100%),
+      linear-gradient(0deg, rgb(8 27 54 / 0.58) 0%, rgb(8 27 54 / 0) 42%);
   }
-  /* On a phone the text sits low, so the photograph stays readable at the top and the navy gathers behind the words. */
   @media (max-width: 767px) {
     .veil-left {
-      background: linear-gradient(180deg, rgb(11 36 71 / 0.25) 0%, rgb(11 36 71 / 0.55) 18%, rgb(11 36 71 / 0.9) 42%, rgb(11 36 71 / 0.96) 100%);
+      background: linear-gradient(180deg, rgb(8 27 54 / 0.28) 0%, rgb(8 27 54 / 0.6) 20%, rgb(8 27 54 / 0.92) 44%, rgb(8 27 54 / 0.97) 100%);
     }
   }
 }

@@ -84,10 +84,15 @@ export default function ModulesPage() {
         <section key={m.slug} id={m.slug} className={cn("scroll-mt-32 py-16 lg:py-24", i % 2 === 1 && "bg-mist")}>
           <div className={cn("container-page grid items-center gap-10 lg:gap-16", i % 2 === 1 ? "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]" : "lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]")}>
             <div className={cn(i % 2 === 1 && "lg:order-2")}>
-              <span className="flex size-12 items-center justify-center rounded-lg bg-brand text-white">
-                <m.icon className="size-6" aria-hidden />
-              </span>
-              <h2 className="h2 mt-6">{m.name}</h2>
+              <div className="flex items-center gap-3">
+                <span className="flex size-12 items-center justify-center rounded-xl bg-brand text-white shadow-card">
+                  <m.icon className="size-6" aria-hidden />
+                </span>
+                <span className="code rounded-md border border-border bg-white px-2.5 py-1 text-xs font-semibold text-navy">
+                  Modul {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h2 className="h2 mt-5">{m.name}</h2>
               <p className="lead mt-4 text-body">{m.lead}</p>
               <ul className="mt-6 grid gap-2 text-[0.9375rem]">
                 {m.features.map((f) => (
@@ -119,21 +124,24 @@ export default function ModulesPage() {
 /** Hero index for this page: every module once, each jumping to its section below. */
 function ModuleIndex() {
   return (
-    <nav aria-label="Daftar modul" className="rounded-xl border border-border bg-white p-2 shadow-product">
+    <nav aria-label="Daftar modul" className="rounded-xl border border-border bg-white p-2.5 shadow-product">
       <ul className="grid gap-1 sm:grid-cols-2">
-        {modules.map((m) => (
+        {modules.map((m, idx) => (
           <li key={m.slug}>
-            <Link href={`#${m.slug}`} className="group flex items-center gap-3 rounded-lg p-3 hover:bg-mist">
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-brand-wash text-brand">
+            <Link href={`#${m.slug}`} className="group flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-mist">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-brand/15 bg-brand-wash text-brand transition-colors group-hover:bg-brand group-hover:text-white">
                 <m.icon className="size-5" aria-hidden />
               </span>
-              <span className="font-heading font-bold text-navy group-hover:text-brand">{m.name}</span>
+              <span className="min-w-0">
+                <span className="code block text-[11px] font-semibold text-muted-foreground">Modul {String(idx + 1).padStart(2, "0")}</span>
+                <span className="font-heading text-[0.95rem] font-bold text-navy group-hover:text-brand">{m.name}</span>
+              </span>
             </Link>
           </li>
         ))}
         <li>
-          <Link href="#perbandingan" className="flex h-full min-h-16 items-center gap-2 rounded-lg p-3 text-sm font-semibold text-brand hover:bg-mist hover:underline">
-            Lihat tabel perbandingan
+          <Link href="#perbandingan" className="flex h-full min-h-16 items-center gap-2 rounded-lg border border-dashed border-border p-3 text-sm font-semibold text-brand hover:border-brand/40 hover:bg-mist hover:underline">
+            Lihat tabel perbandingan <ArrowRightIcon className="size-4" aria-hidden />
           </Link>
         </li>
       </ul>
