@@ -106,7 +106,7 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
                     footer={{ href: "/modul", label: "Bandingkan ketujuh modul" }}
                     side={
                       <Feature
-                        photo={{ src: "/images/fiber-switch.webp", alt: "Perangkat switch jaringan serat optik pada rak infrastruktur server" }}
+                        photo={{ src: "/images/modul-arsip-digital.webp", alt: "Ilustrasi Modul Arsip Digital Smart Records Center", contain: true }}
                         title="Satu sumber data untuk tujuh modul"
                         text="Setiap modul bekerja pada arsip, aturan, dan jejak audit yang sama. AI di setiap modul hanya mengusulkan; arsiparis yang menetapkan."
                         href="/platform/cara-kerja"
@@ -322,14 +322,18 @@ function Feature({
   text: string
   href: string
   cta: string
-  photo?: { src: string; alt: string }
+  photo?: { src: string; alt: string; contain?: boolean }
   children?: React.ReactNode
 }) {
   return (
     <>
       {photo && (
-        <span className="relative block h-32 shrink-0">
-          <Image src={photo.src} alt={photo.alt} fill sizes="280px" className="object-cover" />
+        <span className={cn("relative shrink-0", photo.contain ? "flex h-44 items-center justify-center border-b border-border bg-white p-3" : "block h-32")}>
+          {photo.contain ? (
+            <Image src={photo.src} alt={photo.alt} width={160} height={160} className="max-h-36 w-auto object-contain" />
+          ) : (
+            <Image src={photo.src} alt={photo.alt} fill sizes="280px" className="object-cover" />
+          )}
         </span>
       )}
       <div className="flex flex-1 flex-col p-4">

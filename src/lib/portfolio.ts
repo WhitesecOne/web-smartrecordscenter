@@ -84,11 +84,11 @@ export const experienceOrgs: ExperienceOrg[] = [
   },
   {
     id: "hki",
-    name: "PT HKI",
+    name: "PT Hutama Karya Infrastruktur",
     sector: "Infrastruktur & Arsip Korporasi",
     logo: {
       src: "/images/experience/hki.png",
-      alt: "Logo PT HKI",
+      alt: "Logo PT Hutama Karya Infrastruktur",
       width: 213,
       height: 84,
     },
@@ -125,7 +125,7 @@ export const experienceDetails: ExperienceDetail[] = [
     scope: "Penataan arsip institusi, tata kelola kearsipan, dan pengelolaan pusat arsip (records center) di sektor pendidikan tinggi.",
   },
   {
-    organization: "PT HKI",
+    organization: "PT Hutama Karya Infrastruktur",
     sector: "Infrastruktur & Arsip Korporasi",
     scope: "Pengendalian dokumen proyek infrastruktur, pengelolaan arsip korporasi, serta penataan siklus hidup dokumen perusahaan.",
   },
