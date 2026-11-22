@@ -2,8 +2,10 @@ import { CheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 
 import { ArchitectureDiagram } from "@/components/architecture-diagram"
+import { JsonLd } from "@/components/json-ld"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { Badge } from "@/components/ui/badge"
+import { pageGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 
 const description =
@@ -57,6 +59,7 @@ const response = `201 Created
 export default function ArchitecturePage() {
   return (
     <>
+      <JsonLd data={pageGraph("WebPage", "/platform/arsitektur", "Arsitektur & Integrasi", description)} />
       <PageHero
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Arsitektur & Integrasi" }]}
         title="Arsitektur yang menjaga aturan dan bukti di satu tempat"

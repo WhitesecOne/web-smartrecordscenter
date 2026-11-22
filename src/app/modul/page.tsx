@@ -2,12 +2,14 @@ import { ArrowRightIcon, CheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 
+import { JsonLd } from "@/components/json-ld"
 import { PlatformDiagram } from "@/components/platform-diagram"
 import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { Button } from "@/components/ui/button"
 import { modules } from "@/lib/modules"
+import { modulesCollectionGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
 export default function ModulesPage() {
   return (
     <>
+      <JsonLd data={modulesCollectionGraph()} />
       <PageHero
         crumbs={[{ label: "Modul" }]}
         title="Tujuh modul untuk tata kelola arsip digital"
@@ -116,7 +119,7 @@ export default function ModulesPage() {
         </section>
       ))}
 
-      <CtaBand photo={{ src: "/images/analytics-laptop.webp", alt: "Grafik analitik di layar laptop" }} />
+      <CtaBand photo={{ src: "/images/office-sky.webp", alt: "Gedung perkantoran kaca biru modern di bawah langit cerah" }} />
     </>
   )
 }

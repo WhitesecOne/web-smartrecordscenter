@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/json-ld"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { approachPillars, experienceDetails, experienceDisclaimer } from "@/lib/portfolio"
-import { pageGraph } from "@/lib/seo"
+import { portfolioGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 
 const title = "Portofolio & Pengalaman Profesional"
@@ -38,7 +38,7 @@ const commitmentPoints = [
 export default function PortofolioPage() {
   return (
     <>
-      <JsonLd data={pageGraph("WebPage", "/portofolio", title, description)} />
+      <JsonLd data={portfolioGraph()} />
       <PageHero
         crumbs={[{ label: "Portofolio" }]}
         title="Pengalaman, tata kelola, dan teknologi untuk informasi yang tepercaya"

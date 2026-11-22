@@ -136,7 +136,7 @@ export default function TentangKamiPage() {
         </div>
       </Section>
 
-      <CtaBand photo={{ src: "/images/analytics-laptop.webp", alt: "Grafik analitik di layar laptop" }} />
+      <CtaBand photo={{ src: "/images/office-sky.webp", alt: "Gedung perkantoran kaca biru modern di bawah langit cerah" }} />
     </>
   )
 }

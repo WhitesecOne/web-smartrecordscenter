@@ -2,10 +2,12 @@ import { ArrowRightIcon } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 
+import { JsonLd } from "@/components/json-ld"
 import { PlatformDiagram } from "@/components/platform-diagram"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { moduleBySlug, type Module } from "@/lib/modules"
+import { pageGraph } from "@/lib/seo"
 import { ogBase, platformNav, references } from "@/lib/site"
 
 const description =
@@ -39,11 +41,12 @@ const vocab = [
 export default function PlatformPage() {
   return (
     <>
+      <JsonLd data={pageGraph("WebPage", "/platform", "Ikhtisar Platform", description)} />
       <PageHero
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Ikhtisar" }]}
         title="Satu platform untuk seluruh tata kelola arsip digital"
         lead="Tujuh modul bekerja di atas satu sumber data: arsip, metadata, aturan retensi, hak akses, dan log audit yang sama. Tidak ada lagi arsip yang dikelola di luar aturan."
-        photo={{ src: "/images/data-center.webp", alt: "Lorong ruang server di pusat data" }}
+        photo={{ src: "/images/network-cables.webp", alt: "Rak server pusat data dengan indikator aktif dan kabel jaringan tertata" }}
       />
 
       <Section>
@@ -124,7 +127,7 @@ export default function PlatformPage() {
         </ul>
       </Section>
 
-      <CtaBand photo={{ src: "/images/laptop-dark.webp", alt: "Laptop menampilkan dasbor bertema gelap" }} />
+      <CtaBand photo={{ src: "/images/enterprise-towers.webp", alt: "Menara perkantoran modern berdinding kaca gelap dan baja" }} />
     </>
   )
 }

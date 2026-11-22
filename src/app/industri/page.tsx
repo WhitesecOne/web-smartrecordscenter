@@ -3,10 +3,12 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
+import { JsonLd } from "@/components/json-ld"
 import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { moduleBySlug, type MockKey, type Module } from "@/lib/modules"
+import { industryGraph } from "@/lib/seo"
 import { ogBase, sectors as sectorMeta } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -113,6 +115,7 @@ const photoOf = (id: string) => sectorMeta.find((x) => x.id === id)!.photo
 export default function IndustriPage() {
   return (
     <>
+      <JsonLd data={industryGraph()} />
       <PageHero
         crumbs={[{ label: "Industri" }]}
         title="Satu tata kelola arsip, disesuaikan dengan kewajiban sektor Anda"

@@ -12,8 +12,6 @@ import { site } from "@/lib/site"
 
 import "./globals.css"
 
-// One superfamily drawn for a corporate identity program: a display cut for headings, a text cut tuned for
-// small UI sizes inside product screens, and a mono cut for the codes an archivist copies verbatim.
 const display = Red_Hat_Display({ subsets: ["latin"], variable: "--font-display", display: "swap" })
 const text = Red_Hat_Text({ subsets: ["latin"], variable: "--font-text", display: "swap" })
 const mono = Red_Hat_Mono({ subsets: ["latin"], variable: "--font-mono-face", display: "swap" })
@@ -23,8 +21,62 @@ export const metadata: Metadata = {
   title: { default: `${site.name}: ${site.tagline}`, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
-  openGraph: { siteName: site.name, locale: "id_ID", type: "website" },
-  twitter: { card: "summary_large_image" },
+  category: "Enterprise Software",
+  authors: [{ name: site.entity, url: site.url }],
+  creator: site.entity,
+  publisher: site.entity,
+  keywords: [
+    "Smart Records Center",
+    "tata kelola arsip digital",
+    "aplikasi kearsipan digital Indonesia",
+    "sistem manajemen arsip elektronik",
+    "records management Indonesia",
+    "information governance",
+    "verifikasi dan pemilahan arsip",
+    "klasifikasi arsip",
+    "repositori arsip multi-tenant",
+    "jadwal retensi arsip JRA",
+    "penyusutan arsip digital",
+    "jejak audit SHA-256",
+    "dasbor kepatuhan kearsipan",
+    "UU 43/2009 Kearsipan",
+    "UU 27/2022 Pelindungan Data Pribadi",
+    "ISO 15489",
+    "ISO 23081",
+    "Dublin Core ISO 15836",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    languages: { "id-ID": "/" },
+    types: {
+      "text/markdown": [
+        { url: "/llms.txt", title: "Smart Records Center LLM Summary" },
+        { url: "/llms-full.txt", title: "Smart Records Center LLM Full Documentation" },
+      ],
+    },
+  },
+  openGraph: {
+    siteName: site.name,
+    locale: "id_ID",
+    type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${site.name}: ${site.tagline}` }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name}: ${site.tagline}`,
+    description: site.description,
+    images: ["/opengraph-image"],
+  },
 }
 
 export const viewport: Viewport = { themeColor: "#ffffff" }

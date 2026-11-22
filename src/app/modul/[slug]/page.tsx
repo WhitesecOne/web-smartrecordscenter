@@ -8,7 +8,7 @@ import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { moduleBySlug, modules, type Feature, type Photo } from "@/lib/modules"
-import { pageGraph } from "@/lib/seo"
+import { moduleDetailGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -35,15 +35,15 @@ export async function generateMetadata({ params }: PageProps<"/modul/[slug]">): 
   }
 }
 
-// Digital infrastructure only, no people: each module page takes the next one in turn.
+// Clean enterprise infrastructure and corporate architecture only: each module page takes the next one in turn.
 const ctaPhotos: Photo[] = [
-  { src: "/images/laptop-dashboard.webp", alt: "Laptop menampilkan dasbor data" },
-  { src: "/images/server-drives.webp", alt: "Deretan unit penyimpanan server dengan lampu indikator" },
-  { src: "/images/laptop-dark.webp", alt: "Laptop menampilkan dasbor bertema gelap" },
-  { src: "/images/network-cables.webp", alt: "Kabel jaringan tertata di rak server" },
-  { src: "/images/data-center.webp", alt: "Lorong ruang server di pusat data" },
-  { src: "/images/server-racks.webp", alt: "Rak server berisi perangkat penyimpanan" },
-  { src: "/images/analytics-laptop.webp", alt: "Grafik analitik di layar laptop" },
+  { src: "/images/governance-boardroom.webp", alt: "Ruang rapat eksekutif modern menghadap cakrawala gedung perkantoran" },
+  { src: "/images/server-drives.webp", alt: "Deretan unit penyimpanan server enterprise dengan lampu indikator" },
+  { src: "/images/enterprise-towers.webp", alt: "Menara perkantoran modern berdinding kaca gelap dan baja" },
+  { src: "/images/network-cables.webp", alt: "Rak server pusat data dengan kabel jaringan tertata" },
+  { src: "/images/fiber-switch.webp", alt: "Perangkat switch jaringan serat optik pada rak server" },
+  { src: "/images/skyscrapers-blue.webp", alt: "Dua gedung perkantoran berdinding kaca vertikal modern" },
+  { src: "/images/office-sky.webp", alt: "Gedung perkantoran kaca biru modern di bawah langit cerah" },
 ]
 
 const AiLabel = () => <span className="inline-flex h-6 items-center rounded-[5px] bg-brand-wash px-2 text-xs font-semibold text-brand-ink">Dibantu AI</span>
@@ -56,7 +56,7 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
 
   return (
     <>
-      <JsonLd data={pageGraph("WebPage", `/modul/${m.slug}`, `Modul ${m.name}`, m.metaDescription, { "@type": "Thing", name: m.name, description: m.short })} />
+      <JsonLd data={moduleDetailGraph(m)} />
       <PageHero crumbs={[{ href: "/modul", label: "Modul" }, { label: m.name }]} title={m.title} lead={m.lead} tone="navy" visual={<ProductMock k={m.heroMock} />} />
 
       <nav aria-label={`Bagian modul ${m.name}`} className="sticky top-16 z-20 border-b border-border bg-white/92 backdrop-blur-md lg:top-[6.75rem]">

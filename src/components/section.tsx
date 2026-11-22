@@ -172,7 +172,7 @@ export function PageHero({
   )
 }
 
-const ctaDefaultPhoto: Photo = { src: "/images/laptop-dashboard.webp", alt: "Laptop menampilkan dasbor data" }
+const ctaDefaultPhoto: Photo = { src: "/images/governance-boardroom.webp", alt: "Ruang rapat eksekutif modern menghadap cakrawala gedung perkantoran" }
 
 export function CtaBand({
   title = "Lihat bagaimana arsip organisasi Anda dikelola di Smart Records Center",

@@ -1,11 +1,13 @@
 import { CheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 
+import { JsonLd } from "@/components/json-ld"
 import { ProductMock } from "@/components/product/mocks"
 import { RegisterVerifier } from "@/components/product/register"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import { Badge } from "@/components/ui/badge"
+import { pageGraph } from "@/lib/seo"
 import { site, ogBase } from "@/lib/site"
 
 const description =
@@ -52,6 +54,7 @@ const refs = [
 export default function SecurityPage() {
   return (
     <>
+      <JsonLd data={pageGraph("WebPage", "/platform/keamanan", "Keamanan & Kepatuhan", description)} />
       <PageHero
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Keamanan & Kepatuhan" }]}
         title="Keamanan yang bisa diperiksa, bukan sekadar dijanjikan"
@@ -161,7 +164,7 @@ export default function SecurityPage() {
         </div>
       </Section>
 
-      <CtaBand photo={{ src: "/images/server-racks.webp", alt: "Rak server berisi perangkat penyimpanan" }} title="Tinjau model keamanan bersama tim kami" lead="Kami siapkan sesi khusus untuk tim keamanan informasi dan kepatuhan Anda, termasuk pembahasan dokumen arsitektur dan model ancaman." />
+      <CtaBand photo={{ src: "/images/fiber-switch.webp", alt: "Perangkat switch jaringan serat optik pada rak infrastruktur server" }} title="Tinjau model keamanan bersama tim kami" lead="Kami siapkan sesi khusus untuk tim keamanan informasi dan kepatuhan Anda, termasuk pembahasan dokumen arsitektur dan model ancaman." />
     </>
   )
 }

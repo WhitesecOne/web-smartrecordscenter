@@ -2,10 +2,12 @@ import { ArrowRightIcon, CheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 
+import { JsonLd } from "@/components/json-ld"
 import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
 import type { MockKey } from "@/lib/modules"
+import { pageGraph } from "@/lib/seo"
 import { ogBase } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -158,6 +160,7 @@ const limits = [
 export default function MengapaKamiPage() {
   return (
     <>
+      <JsonLd data={pageGraph("WebPage", "/mengapa-kami", title, description)} />
       <PageHero
         crumbs={[{ label: "Mengapa Kami" }]}
         title="Tata kelola arsip yang bisa dibuktikan, bukan sekadar disimpan"

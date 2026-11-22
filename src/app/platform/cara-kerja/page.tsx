@@ -1,6 +1,7 @@
 import { CheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 
+import { JsonLd } from "@/components/json-ld"
 import { LifecycleTimeline } from "@/components/lifecycle"
 import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
@@ -8,6 +9,7 @@ import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section
 import Link from "next/link"
 
 import { moduleBySlug, type MockKey, type Module } from "@/lib/modules"
+import { howToLifecycleGraph } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 import { ogBase } from "@/lib/site"
 
@@ -71,11 +73,12 @@ const disposal = [
 export default function HowItWorksPage() {
   return (
     <>
+      <JsonLd data={howToLifecycleGraph()} />
       <PageHero
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Cara Kerja" }]}
         title="Perjalanan satu arsip, dari diterima sampai nasib akhir"
         lead="Setiap tahap punya aturan yang dijaga sistem, modul yang mengerjakannya, dan bukti yang tercatat. Tidak ada tahap yang bergantung pada ingatan seseorang."
-        photo={{ src: "/images/laptop-dark.webp", alt: "Laptop menampilkan dasbor bertema gelap" }}
+        photo={{ src: "/images/enterprise-towers.webp", alt: "Menara perkantoran modern berdinding kaca gelap dan baja" }}
       />
 
       <Section tone="mist">

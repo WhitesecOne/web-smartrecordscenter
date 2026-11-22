@@ -106,7 +106,7 @@ export function HeaderNav({ modules }: { modules: NavModule[] }) {
                     footer={{ href: "/modul", label: "Bandingkan ketujuh modul" }}
                     side={
                       <Feature
-                        photo={{ src: "/images/server-racks.webp", alt: "Rak server berisi perangkat penyimpanan dan jaringan" }}
+                        photo={{ src: "/images/fiber-switch.webp", alt: "Perangkat switch jaringan serat optik pada rak infrastruktur server" }}
                         title="Satu sumber data untuk tujuh modul"
                         text="Setiap modul bekerja pada arsip, aturan, dan jejak audit yang sama. AI di setiap modul hanya mengusulkan; arsiparis yang menetapkan."
                         href="/platform/cara-kerja"
