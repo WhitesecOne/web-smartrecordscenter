@@ -27,6 +27,17 @@ export type ApproachPillar = {
 /** Selected organizations and sectors from Smart_Records_Center_Selected_Experience.pptx. */
 export const experienceOrgs: ExperienceOrg[] = [
   {
+    id: "anri",
+    name: "Arsip Nasional Republik Indonesia (ANRI)",
+    sector: "Kearsipan Nasional & Standardisasi",
+    logo: {
+      src: "/images/experience/anri.png",
+      alt: "Logo Arsip Nasional Republik Indonesia (ANRI)",
+      width: 320,
+      height: 291,
+    },
+  },
+  {
     id: "adb",
     name: "Asian Development Bank (ADB)",
     sector: "Pembangunan Internasional",
@@ -109,6 +120,11 @@ export const experienceOrgs: ExperienceOrg[] = [
 
 /** Grouped scope of professional experience from OUR PORTFOLIO.docx. */
 export const experienceDetails: ExperienceDetail[] = [
+  {
+    organization: "Arsip Nasional Republik Indonesia (ANRI)",
+    sector: "Kearsipan Nasional & Standardisasi",
+    scope: "Keterlibatan penasihat Smart Records Center dalam Komite Teknis SNI ISO 30301 (sistem manajemen rekod) bersama ANRI.",
+  },
   {
     organization: "Asian Development Bank (ADB)",
     sector: "Lembaga Pembangunan Internasional",

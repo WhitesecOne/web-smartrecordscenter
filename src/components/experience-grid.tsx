@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Selected professional experience logo grid (from Smart_Records_Center_Selected_Experience.pptx).
- * Laid out 4-over-3 on desktop so all seven organizations balance cleanly without an orphan gap.
+ * Laid out 4-over-4 on desktop so all eight organizations balance cleanly without an orphan gap.
  */
 export function ExperienceGrid({ className, showDisclaimer = true }: { className?: string; showDisclaimer?: boolean }) {
   return (
@@ -35,7 +35,7 @@ export function ExperienceGrid({ className, showDisclaimer = true }: { className
                   alt={org.logo.alt}
                   width={org.logo.width}
                   height={org.logo.height}
-                  className={cn("w-auto max-w-[148px] object-contain", org.id === "adb" || org.id === "bp" ? "max-h-12" : "max-h-11")}
+                  className={cn("w-auto max-w-[148px] object-contain", org.id === "anri" ? "max-h-14" : org.id === "adb" || org.id === "bp" ? "max-h-12" : "max-h-11")}
                 />
               )}
             </div>
